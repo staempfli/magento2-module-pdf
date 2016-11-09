@@ -8,7 +8,7 @@ interface TableOfContents
      * Returns new instance with overridden options
      *
      * @param Options $options
-     * @return Medium
+     * @return TableOfContents
      */
     public function withOptions(Options $options);
 

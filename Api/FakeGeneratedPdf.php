@@ -5,9 +5,9 @@ namespace Staempfli\Pdf\Api;
 final class FakeGeneratedPdf implements GeneratedPdf
 {
     /** @var string */
-    private $contents;
+    public $contents;
     /** @var bool */
-    private $isGenerated = false;
+    public $isGenerated = false;
     /** @var bool */
     private $isSent = false;
 

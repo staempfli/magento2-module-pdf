@@ -5,7 +5,28 @@ namespace Staempfli\Pdf\Api;
 class FakePdfEngine implements PdfEngine
 {
     /** @var FakeGeneratedPdf */
-    private $fakeGeneratedPdf;
+    public $fakeGeneratedPdf;
+    /**
+     * @var Options
+     */
+    public $globalOptions;
+    /**
+     * @var Medium
+     */
+    public $cover;
+    /**
+     * @var TableOfContents
+     */
+    public $tableOfContents;
+    /**
+     * @var Medium[]
+     */
+    public $pages;
+
+    public function __construct()
+    {
+        $this->fakeGeneratedPdf = new FakeGeneratedPdf();
+    }
 
     /**
      * @param Options $globalOptions
@@ -16,8 +37,11 @@ class FakePdfEngine implements PdfEngine
      */
     public function generatePdf(Options $globalOptions, Medium $cover, TableOfContents $toc, Medium ...$pages)
     {
-        // TODO: Implement generatePdf() method.
+        $this->globalOptions = $globalOptions;
+        $this->cover = $cover;
+        $this->tableOfContents = $toc;
+        $this->pages = $pages;
+        $this->fakeGeneratedPdf->isGenerated = true;
+        return $this->fakeGeneratedPdf;
     }
-
-    //TODO implement methods needed for assertions
 }

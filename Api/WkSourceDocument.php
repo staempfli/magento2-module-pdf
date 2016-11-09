@@ -1,8 +1,10 @@
 <?php
 namespace Staempfli\Pdf\Api;
 
-
-class WkSourceDocument implements SourceDocument
+/**
+ * Minimal implementation of SourceDocument. Clients should provide their own implementation
+ */
+final class WkSourceDocument implements SourceDocument
 {
     /** @var string */
     private $html;
@@ -19,18 +21,13 @@ class WkSourceDocument implements SourceDocument
         $this->options = $options;
     }
 
-
     /**
-     * Named constructor: creates empty DIN A4 page
+     * @param Medium $medium
+     * @return Medium
      */
-    public static function dinA4()
-    {
-        return new static('', new WkOptions([WkOptions::KEY_PAGE_SIZE => WkOptions::PAGE_SIZE_DIN_A4]));
-    }
-
     public function printTo(Medium $medium)
     {
-        // TODO: Implement printTo() method.
+        return $medium->withHtml($this->html)->withOptions($this->options);
     }
 
 }

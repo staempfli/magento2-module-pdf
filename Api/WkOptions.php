@@ -10,9 +10,17 @@ final class WkOptions extends ArrayObject implements Options
     const PAGE_SIZE_DIN_A4 = 'A4';
     const PAGE_SIZE_LETTER = 'letter';
 
+    /**
+     * @param Options $newOptions
+     * @return WkOptions
+     */
     public function merge(Options $newOptions)
     {
-        // TODO: Implement merge() method.
+        $merged = clone $this;
+        foreach ($newOptions as $key => $value) {
+            $merged[$key] = $value;
+        }
+        return $merged;
     }
 
 }

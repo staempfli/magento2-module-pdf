@@ -1,7 +1,9 @@
 <?php
 namespace Staempfli\Pdf\Api;
 
-
+/**
+ * Fake implementation returned by FakePdfEngine
+ */
 final class FakeGeneratedPdf implements GeneratedPdf
 {
     /** @var string */
@@ -21,16 +23,24 @@ final class FakeGeneratedPdf implements GeneratedPdf
 
     public function saveAs($path)
     {
-        // TODO: Implement saveAs() method.
+        \file_put_contents($path, $this->contents);
     }
 
     public function send()
     {
-        // TODO: Implement send() method.
+        $this->isSent = true;
     }
 
     public function toString()
     {
-        // TODO: Implement toString() method.
+        return $this->contents;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSent()
+    {
+        return $this->isSent;
     }
 }

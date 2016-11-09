@@ -1,9 +1,11 @@
 <?php
-namespace Staempfli\Pdf\Api;
+namespace Staempfli\Pdf\Adapter;
 
 // TODO implement
 // this is the adapter to the actual PDF generating library.
 // Always use mock/fake in unit tests, only integration test for this
+use Staempfli\Pdf\Api\GeneratedPdf;
+
 final class WkGeneratedPdf implements GeneratedPdf
 {
     public function saveAs($path)

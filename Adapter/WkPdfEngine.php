@@ -1,6 +1,12 @@
 <?php
-namespace Staempfli\Pdf\Api;
+namespace Staempfli\Pdf\Adapter;
 
+
+use Staempfli\Pdf\Api\GeneratedPdf;
+use Staempfli\Pdf\Api\Medium;
+use Staempfli\Pdf\Api\Options;
+use Staempfli\Pdf\Api\PdfEngine;
+use Staempfli\Pdf\Api\TableOfContents;
 
 final class WkPdfEngine implements PdfEngine
 {

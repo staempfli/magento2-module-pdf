@@ -1,7 +1,9 @@
 <?php
 namespace Staempfli\Pdf\Api;
 
-
+/**
+ * Fake implementation to be used in tests
+ */
 class FakePdfEngine implements PdfEngine
 {
     /** @var FakeGeneratedPdf */

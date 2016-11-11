@@ -23,11 +23,11 @@ final class WkSourceDocument implements SourceDocument
 
     /**
      * @param Medium $medium
-     * @return Medium
+     * @return void
      */
     public function printTo(Medium $medium)
     {
-        return $medium->withHtml($this->html)->withOptions($this->options);
+        $medium->printHtml($this->html, $this->options);
     }
 
 }

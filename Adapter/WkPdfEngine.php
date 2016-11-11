@@ -10,14 +10,26 @@ use Staempfli\Pdf\Api\TableOfContents;
 
 final class WkPdfEngine implements PdfEngine
 {
+    public function addPage($html, Options $options)
+    {
+        // TODO: Implement addPage() method.
+    }
+
+    public function setCover($html, Options $options)
+    {
+        // TODO: Implement setCover() method.
+    }
+
+    public function setTableOfContents(Options $options)
+    {
+        // TODO: Implement setTableOfContents() method.
+    }
+
     /**
      * @param Options $globalOptions
-     * @param Medium $cover
-     * @param TableOfContents $toc
-     * @param Medium[] ...$pages
      * @return GeneratedPdf
      */
-    public function generatePdf(Options $globalOptions, Medium $cover, TableOfContents $toc, Medium ...$pages)
+    public function generatePdf(Options $globalOptions)
     {
         // TODO: Implement generatePdf() method.
         // this is the adapter to the actual PDF generating library.

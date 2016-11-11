@@ -1,32 +1,25 @@
 <?php
 namespace Staempfli\Pdf\Test\Unit\Api;
 
+use Staempfli\Pdf\Api\FakePdfEngine;
 use Staempfli\Pdf\Api\WkOptions;
-use Staempfli\Pdf\Api\WkPdfTableOfContents;
+use Staempfli\Pdf\Api\PdfTableOfContents;
 
 class WkTableOfContentsTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var WkPdfTableOfContents */
+    /** @var FakePdfEngine */
+    private $pdfEngine;
+    /** @var PdfTableOfContents */
     private $tableOfContents;
 
     protected function setUp()
     {
-        $this->tableOfContents = new WkPdfTableOfContents();
-        $this->assertEquals(new WkOptions(), $this->tableOfContents->options());
+        $this->pdfEngine = new FakePdfEngine();
+        $this->tableOfContents = new PdfTableOfContents($this->pdfEngine);
     }
-    public function testWithOptions()
+    public function testPrintToc()
     {
-        $tocWithOptions = $this->tableOfContents->withOptions(new WkOptions(['option1' => 'value1']));
-        $this->assertEquals(new WkOptions(['option1' => 'value1']), $tocWithOptions->options());
-        $this->assertEquals(new WkOptions(), $this->tableOfContents->options(), 'original instance should be unchanged');
-    }
-    public function testWithOptionsMerged()
-    {
-        $tocWithOptions = $this->tableOfContents
-            ->withOptions(new WkOptions(['option1' => 'value1']))
-            ->withOptions(new WkOptions(['option2' => 'value2']))
-            ->withOptions(new WkOptions(['option1' => 'overridden']));
-        $this->assertEquals(new WkOptions(['option1' => 'overridden', 'option2' => 'value2']), $tocWithOptions->options());
-        $this->assertEquals(new WkOptions(), $this->tableOfContents->options(), 'original instance should be unchanged');
+        $this->tableOfContents->printToc(new WkOptions(['print-option' => 'something']));
+        $this->assertEquals(new WkOptions(['print-option' => 'something']), $this->pdfEngine->tableOfContents);
     }
 }

@@ -13,36 +13,48 @@ class FakePdfEngine implements PdfEngine
      */
     public $globalOptions;
     /**
-     * @var Medium
+     * @var array [string, Options]
      */
     public $cover;
     /**
-     * @var TableOfContents
+     * @var Options
      */
     public $tableOfContents;
     /**
-     * @var Medium[]
+     * @var array[] array of pages as [string, Options]
      */
-    public $pages;
+    public $pages = [];
 
     public function __construct()
     {
         $this->fakeGeneratedPdf = new FakeGeneratedPdf();
     }
 
+    public function addPage($html, Options $options)
+    {
+        $this->pages[] = [$html, $options];
+    }
+
+    public function setCover($html, Options $options)
+    {
+        $this->cover = [$html, $options];
+    }
+
+    public function setTableOfContents(Options $options)
+    {
+        $this->tableOfContents = $options;
+    }
+
+
     /**
      * @param Options $globalOptions
      * @param Medium $cover
-     * @param TableOfContents $toc
      * @param Medium[] ...$pages
      * @return FakeGeneratedPdf
      */
-    public function generatePdf(Options $globalOptions, Medium $cover, TableOfContents $toc, Medium ...$pages)
+    public function generatePdf(Options $globalOptions)
     {
         $this->globalOptions = $globalOptions;
-        $this->cover = $cover;
-        $this->tableOfContents = $toc;
-        $this->pages = $pages;
         $this->fakeGeneratedPdf->isGenerated = true;
         return $this->fakeGeneratedPdf;
     }

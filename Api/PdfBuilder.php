@@ -7,48 +7,31 @@ class PdfBuilder
     private $engine;
     /** @var Options */
     private $options;
-    /** @var Medium */
-    private $cover;
-    /** @var TableOfContents */
-    private $tableOfContents;
-    /** @var Medium[] */
-    private $pages = [];
 
     public function __construct(PdfEngine $engine)
     {
         $this->engine = $engine;
         $this->options = new WkOptions();
-        $this->cover = new NullMedium();
-        $this->tableOfContents = new NullToc();
     }
 
+    /**
+     * Replace options
+     *
+     * @param Options $options
+     */
     public function setOptions(Options $options)
     {
         $this->options = $options;
     }
 
     /**
-     * A page objects puts the content of a singe webpage into the output document.
+     * Add/override options
      *
-     * @see http://wkhtmltopdf.org/usage/wkhtmltopdf.txt
-     * @param Medium $page
+     * @param Options $options
      */
-    public function addPage(Medium $page)
+    public function addOptions(Options $options)
     {
-        $this->pages[] = $page;
-    }
-
-    /**
-     * A cover objects puts the content of a singe webpage into the output document,
-     * the page does not appear in the table of content, and does not have headers
-     * and footers.
-     *
-     * @see http://wkhtmltopdf.org/usage/wkhtmltopdf.txt
-     * @param Medium $cover
-     */
-    public function setCover(Medium $cover)
-    {
-        $this->cover = $cover;
+        $this->options = $this->options->merge($options);
     }
 
     /**
@@ -61,11 +44,12 @@ class PdfBuilder
      * --dump-outline, see the Outline Options section.
      *
      * @see http://wkhtmltopdf.org/usage/wkhtmltopdf.txt
-     * @param TableOfContents $tableOfContents
+     * @param Options $tocOptions
      */
-    public function setTableOfContents(TableOfContents $tableOfContents)
+    public function setTableOfContents(Options $tocOptions)
     {
-        $this->tableOfContents = $tableOfContents;
+        $toc = new PdfTableOfContents($this->engine);
+        $toc->printToc($tocOptions);
     }
 
     /**
@@ -74,13 +58,9 @@ class PdfBuilder
      * @see http://wkhtmltopdf.org/usage/wkhtmltopdf.txt
      * @param SourceDocument $source
      */
-    public function addPageFromSource(SourceDocument $source)
+    public function appendContent(SourceDocument $source)
     {
-        //TODO decide if Medium abstraction can be dropped
-        // => $this->pages[] = $source;
-        // alternatively rename WkPdfPage to WkPdfMedium and make addPage() private
-        // to not confuse "web page" with "pdf page"
-        $this->addPage($source->printTo(new WkPdfPage()));
+        $source->printTo(new PdfAppendContent($this->engine));
     }
 
     /**
@@ -92,11 +72,9 @@ class PdfBuilder
      * @see http://wkhtmltopdf.org/usage/wkhtmltopdf.txt
      * @param SourceDocument $source
      */
-    public function setCoverFromSource(SourceDocument $source)
+    public function setCover(SourceDocument $source)
     {
-        //TODO decide if Medium abstraction can be dropped
-        // => $this->cover = $source;
-        $this->setCover($source->printTo(new WkPdfPage()));
+        $source->printTo(new PdfCover($this->engine));
     }
 
     /**
@@ -156,6 +134,6 @@ class PdfBuilder
      */
     public function build()
     {
-        return $this->engine->generatePdf($this->options, $this->cover, $this->tableOfContents, ...$this->pages);
+        return $this->engine->generatePdf($this->options);
     }
 }

@@ -5,7 +5,7 @@ interface SourceDocument
 {
     /**
      * @param Medium $medium
-     * @return Medium
+     * @return void
      */
     public function printTo(Medium $medium);
 }

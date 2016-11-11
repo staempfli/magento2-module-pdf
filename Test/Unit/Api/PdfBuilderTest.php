@@ -4,12 +4,9 @@ namespace Staempfli\Pdf\Test\Unit\Api;
 
 use Staempfli\Pdf\Api\FakePdfEngine;
 use Staempfli\Pdf\Api\GeneratedPdf;
-use Staempfli\Pdf\Api\NullMedium;
 use Staempfli\Pdf\Api\NullToc;
 use Staempfli\Pdf\Api\PdfBuilder;
 use Staempfli\Pdf\Api\WkOptions;
-use Staempfli\Pdf\Api\WkPdfPage;
-use Staempfli\Pdf\Api\WkPdfTableOfContents;
 use Staempfli\Pdf\Api\WkSourceDocument;
 
 
@@ -31,53 +28,58 @@ class PdfBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->fakePdfEngine->fakeGeneratedPdf->isGenerated);
         $this->assertInstanceOf(GeneratedPdf::class, $this->pdfBuilder->build());
         $this->assertTrue($this->fakePdfEngine->fakeGeneratedPdf->isGenerated);
-        $this->assertInstanceOf(NullMedium::class, $this->fakePdfEngine->cover);
-        $this->assertInstanceOf(NullToc::class, $this->fakePdfEngine->tableOfContents);
+        $this->assertNull($this->fakePdfEngine->tableOfContents);
+        $this->assertNull($this->fakePdfEngine->cover);
         $this->assertCount(0, $this->fakePdfEngine->pages);
     }
 
-    public function testBuildWithContent()
+    public function testBuildWithGlobalOptions()
     {
         $this->assertFalse($this->fakePdfEngine->fakeGeneratedPdf->isGenerated);
         $options = new WkOptions(['something' => 'something']);
-        $tableOfContents = new WkPdfTableOfContents();
-        $cover = new WkPdfPage();
-        $page1 = new WkPdfPage();
-        $page2 = new WkPdfPage();
-        $this->pdfBuilder->setCover($cover);
         $this->pdfBuilder->setOptions($options);
-        $this->pdfBuilder->setTableOfContents($tableOfContents);
-        $this->pdfBuilder->addPage($page1);
-        $this->pdfBuilder->addPage($page2);
+
         $this->assertInstanceOf(GeneratedPdf::class, $this->pdfBuilder->build());
         $this->assertTrue($this->fakePdfEngine->fakeGeneratedPdf->isGenerated);
-        $this->assertSame([$page1, $page2], $this->fakePdfEngine->pages);
-        $this->assertSame($cover, $this->fakePdfEngine->cover);
-        $this->assertSame($tableOfContents, $this->fakePdfEngine->tableOfContents);
         $this->assertSame($options, $this->fakePdfEngine->globalOptions);
     }
 
-    public function testAddPageFromSource()
+    public function testBuildWithTableOfContents()
     {
-        $this->pdfBuilder->addPageFromSource(new WkSourceDocument('HTML source', new WkOptions(['looks' => 'nice'])));
-        $this->pdfBuilder->build();
-        $this->assertEquals('HTML source', $this->fakePdfEngine->pages[0]->html());
-        $this->assertEquals(new WkOptions(['looks' => 'nice']), $this->fakePdfEngine->pages[0]->options());
+        $this->assertFalse($this->fakePdfEngine->fakeGeneratedPdf->isGenerated);
+        $this->pdfBuilder->setTableOfContents(new WkOptions(['toc' => 'tic']));
+
+        $this->assertInstanceOf(GeneratedPdf::class, $this->pdfBuilder->build());
+        $this->assertTrue($this->fakePdfEngine->fakeGeneratedPdf->isGenerated);
+        $this->assertEquals(new WkOptions(['toc' => 'tic']), $this->fakePdfEngine->tableOfContents);
     }
-    public function testSetCoverFromSource()
+
+    public function testAddOptions()
     {
-        $this->pdfBuilder->setCoverFromSource(new WkSourceDocument('Cover HTML source', new WkOptions(['looks' => 'great'])));
+        $this->pdfBuilder->setOptions(new WkOptions(['first-option' => 'foo', 'second-option' => 'bar']));
+        $this->pdfBuilder->addOptions(new WkOptions(['third-option' => 'baz', 'first-option' => 'foo²']));
         $this->pdfBuilder->build();
-        $this->assertEquals('Cover HTML source', $this->fakePdfEngine->cover->html());
-        $this->assertEquals(new WkOptions(['looks' => 'great']), $this->fakePdfEngine->cover->options());
+        $this->assertEquals(new WkOptions(['first-option' => 'foo²', 'second-option' => 'bar', 'third-option' => 'baz']), $this->fakePdfEngine->globalOptions);
     }
-    public function testSetHeaderFromSource()
+    public function testAppendContent()
+    {
+        $this->pdfBuilder->appendContent(new WkSourceDocument('HTML source', new WkOptions(['looks' => 'nice'])));
+        $this->pdfBuilder->build();
+        $this->assertEquals(['HTML source', new WkOptions(['looks' => 'nice'])], $this->fakePdfEngine->pages[0]);
+    }
+    public function testSetCover()
+    {
+        $this->pdfBuilder->setCover(new WkSourceDocument('Cover HTML source', new WkOptions(['looks' => 'great'])));
+        $this->pdfBuilder->build();
+        $this->assertEquals(['Cover HTML source', new WkOptions(['looks' => 'great'])], $this->fakePdfEngine->cover);
+    }
+    public function testSetHeaderHtml()
     {
         $this->pdfBuilder->setHeaderHtml('Header HTML source');
         $this->pdfBuilder->build();
         $this->assertEquals('Header HTML source', $this->fakePdfEngine->globalOptions[WkOptions::KEY_HEADER_HTML]);
     }
-    public function testSetFooterFromSource()
+    public function testSetFooterHtml()
     {
         $this->pdfBuilder->setFooterHtml('Footer HTML source');
         $this->pdfBuilder->build();

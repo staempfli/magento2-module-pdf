@@ -1,12 +1,12 @@
 <?php
 namespace Staempfli\Pdf\Model;
 
-use Staempfli\Pdf\Api\GeneratedPdf;
+use Staempfli\Pdf\Api\PdfFile;
 
 /**
  * Interface for PDF files loaded from file cache
  */
-class CachedPdf implements GeneratedPdf
+class CachedPdfFile implements PdfFile
 {
     public function __construct($pathToCachedFile)
     {

@@ -2,7 +2,7 @@
 namespace Staempfli\Pdf\Test\Unit\Api;
 
 use Staempfli\Pdf\Api\FakePdfEngine;
-use Staempfli\Pdf\Api\WkOptions;
+use Staempfli\Pdf\Api\PdfOptions;
 use Staempfli\Pdf\Api\PdfAppendContent;
 
 class PdfAppendContentTest extends \PHPUnit_Framework_TestCase
@@ -20,13 +20,13 @@ class PdfAppendContentTest extends \PHPUnit_Framework_TestCase
     public function testPrintHtml()
     {
         $html = '<h1>html</h1>';
-        $options = new WkOptions(['version' => 'html10']);
+        $options = new PdfOptions(['version' => 'html10']);
         $this->medium->printHtml($html, $options);
         $this->assertEquals(
             [[$html, $options]], $this->pdfEngine->pages);
 
         $html2 = '<h1>more html</h1>';
-        $options2 = new WkOptions(['version' => 'html11']);
+        $options2 = new PdfOptions(['version' => 'html11']);
         $this->medium->printHtml($html2, $options2);
         $this->assertEquals(
             [[$html, $options], [$html2, $options2]], $this->pdfEngine->pages);

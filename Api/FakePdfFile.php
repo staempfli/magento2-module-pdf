@@ -4,7 +4,7 @@ namespace Staempfli\Pdf\Api;
 /**
  * Fake implementation returned by FakePdfEngine
  */
-final class FakeGeneratedPdf implements GeneratedPdf
+final class FakePdfFile implements PdfFile
 {
     /** @var string */
     public $contents;

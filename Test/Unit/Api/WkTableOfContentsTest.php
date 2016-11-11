@@ -2,7 +2,7 @@
 namespace Staempfli\Pdf\Test\Unit\Api;
 
 use Staempfli\Pdf\Api\FakePdfEngine;
-use Staempfli\Pdf\Api\WkOptions;
+use Staempfli\Pdf\Api\PdfOptions;
 use Staempfli\Pdf\Api\PdfTableOfContents;
 
 class WkTableOfContentsTest extends \PHPUnit_Framework_TestCase
@@ -19,7 +19,7 @@ class WkTableOfContentsTest extends \PHPUnit_Framework_TestCase
     }
     public function testPrintToc()
     {
-        $this->tableOfContents->printToc(new WkOptions(['print-option' => 'something']));
-        $this->assertEquals(new WkOptions(['print-option' => 'something']), $this->pdfEngine->tableOfContents);
+        $this->tableOfContents->printToc(new PdfOptions(['print-option' => 'something']));
+        $this->assertEquals(new PdfOptions(['print-option' => 'something']), $this->pdfEngine->tableOfContents);
     }
 }

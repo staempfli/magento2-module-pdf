@@ -1,7 +1,7 @@
 <?php
 namespace Staempfli\Pdf\Test\Unit\Api;
 
-use Staempfli\Pdf\Api\WkOptions;
+use Staempfli\Pdf\Api\PdfOptions;
 
 class WkOptionsTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,8 +13,8 @@ class WkOptionsTest extends \PHPUnit_Framework_TestCase
      */
     public function testMerge($originalValues, $valuesToMerge, $expectedMergedValues)
     {
-        $options = new WkOptions($originalValues);
-        $mergedOptions = $options->merge(new WkOptions($valuesToMerge));
+        $options = new PdfOptions($originalValues);
+        $mergedOptions = $options->merge(new PdfOptions($valuesToMerge));
         $this->assertEquals(
             $expectedMergedValues,
             \iterator_to_array($mergedOptions)

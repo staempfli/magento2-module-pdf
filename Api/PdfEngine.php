@@ -31,7 +31,7 @@ interface PdfEngine
 
     /**
      * @param Options $globalOptions
-     * @return GeneratedPdf
+     * @return PdfFile
      */
     public function generatePdf(Options $globalOptions);
 }

@@ -4,7 +4,7 @@ namespace Staempfli\Pdf\Api;
 /**
  * Minimal implementation of SourceDocument. Clients should provide their own implementation
  */
-final class WkSourceDocument implements SourceDocument
+final class FakeSourceDocument implements SourceDocument
 {
     /** @var string */
     private $html;
@@ -13,9 +13,9 @@ final class WkSourceDocument implements SourceDocument
 
     /**
      * @param string $html
-     * @param WkOptions $options
+     * @param PdfOptions $options
      */
-    public function __construct($html, WkOptions $options)
+    public function __construct($html, PdfOptions $options)
     {
         $this->html = $html;
         $this->options = $options;

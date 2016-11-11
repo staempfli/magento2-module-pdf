@@ -1,7 +1,7 @@
 <?php
 namespace Staempfli\Pdf\Api;
 
-class PdfBuilder
+class Pdf
 {
     /** @var PdfEngine */
     private $engine;
@@ -11,7 +11,7 @@ class PdfBuilder
     public function __construct(PdfEngine $engine)
     {
         $this->engine = $engine;
-        $this->options = new WkOptions();
+        $this->options = new PdfOptions();
     }
 
     /**
@@ -100,7 +100,7 @@ class PdfBuilder
      */
     public function setHeaderHtml($html)
     {
-        $this->options[WkOptions::KEY_HEADER_HTML] = $html;
+        $this->options[PdfOptions::KEY_HEADER_HTML] = $html;
     }
 
     /**
@@ -126,13 +126,13 @@ class PdfBuilder
      */
     public function setFooterHtml($html)
     {
-        $this->options[WkOptions::KEY_FOOTER_HTML] = $html;
+        $this->options[PdfOptions::KEY_FOOTER_HTML] = $html;
     }
 
     /**
-     * @return GeneratedPdf
+     * @return PdfFile
      */
-    public function build()
+    public function file()
     {
         return $this->engine->generatePdf($this->options);
     }

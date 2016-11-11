@@ -2,7 +2,7 @@
 namespace Staempfli\Pdf\Adapter;
 
 
-use Staempfli\Pdf\Api\GeneratedPdf;
+use Staempfli\Pdf\Api\PdfFile;
 use Staempfli\Pdf\Api\Medium;
 use Staempfli\Pdf\Api\Options;
 use Staempfli\Pdf\Api\PdfEngine;
@@ -27,7 +27,7 @@ final class WkPdfEngine implements PdfEngine
 
     /**
      * @param Options $globalOptions
-     * @return GeneratedPdf
+     * @return PdfFile
      */
     public function generatePdf(Options $globalOptions)
     {

@@ -3,11 +3,11 @@ namespace Staempfli\Pdf\Model;
 
 use Magento\Framework\Filesystem\Io\File as FileSystem;
 use Magento\Framework\ObjectManager\FactoryInterface;
-use Staempfli\Pdf\Api\PdfBuilder;
+use Staempfli\Pdf\Api\Pdf;
 use Staempfli\Pdf\Api\PdfEngine;
-use Staempfli\Pdf\Api\WkOptions;
+use Staempfli\Pdf\Api\PdfOptions;
 
-class PdfBuilderFactory
+class PdfFactory
 {
     /**
      * @var PdfEngine
@@ -21,7 +21,7 @@ class PdfBuilderFactory
 
     public function create()
     {
-        $builder = new PdfBuilder($this->pdfEngine);
+        $builder = new Pdf($this->pdfEngine);
         $builder->setOptions($this->optionsFromConfig());
         return $builder;
     }
@@ -29,6 +29,6 @@ class PdfBuilderFactory
     private function optionsFromConfig()
     {
         //TODO retrieve global options from system configuration
-        return new WkOptions();
+        return new PdfOptions();
     }
 }

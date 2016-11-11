@@ -7,7 +7,7 @@ use \ArrayObject;
  * Constants are provided for convenience. For a full list of options, see
  * http://wkhtmltopdf.org/usage/wkhtmltopdf.txt
  */
-final class WkOptions extends ArrayObject implements Options
+final class PdfOptions extends ArrayObject implements Options
 {
     // global options
     const KEY_BINARY = 'binary';
@@ -51,7 +51,7 @@ final class WkOptions extends ArrayObject implements Options
 
     /**
      * @param Options $newOptions
-     * @return WkOptions
+     * @return PdfOptions
      */
     public function merge(Options $newOptions)
     {

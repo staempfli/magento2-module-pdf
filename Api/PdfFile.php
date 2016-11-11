@@ -1,7 +1,7 @@
 <?php
 namespace Staempfli\Pdf\Api;
 
-interface GeneratedPdf
+interface PdfFile
 {
     /**
      * @param string $path

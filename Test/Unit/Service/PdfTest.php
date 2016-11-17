@@ -1,13 +1,13 @@
 <?php
-namespace Staempfli\Pdf\Test\Unit\Api;
+namespace Staempfli\Pdf\Test\Unit\Service;
 
 
-use Staempfli\Pdf\Api\FakePdfEngine;
+use Staempfli\Pdf\Service\FakePdfEngine;
 use Staempfli\Pdf\Api\PdfFile;
 use Staempfli\Pdf\Api\NullToc;
-use Staempfli\Pdf\Api\Pdf;
-use Staempfli\Pdf\Api\PdfOptions;
-use Staempfli\Pdf\Api\FakeSourceDocument;
+use Staempfli\Pdf\Service\Pdf;
+use Staempfli\Pdf\Service\PdfOptions;
+use Staempfli\Pdf\Service\FakeSourceDocument;
 
 
 class PdfTest extends \PHPUnit_Framework_TestCase

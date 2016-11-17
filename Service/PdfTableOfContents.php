@@ -1,5 +1,9 @@
 <?php
-namespace Staempfli\Pdf\Api;
+namespace Staempfli\Pdf\Service;
+
+use Staempfli\Pdf\Api\Options;
+use Staempfli\Pdf\Api\PdfEngine;
+use Staempfli\Pdf\Api\TableOfContents;
 
 final class PdfTableOfContents implements TableOfContents
 {

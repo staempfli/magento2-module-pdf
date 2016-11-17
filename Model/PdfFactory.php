@@ -3,9 +3,9 @@ namespace Staempfli\Pdf\Model;
 
 use Magento\Framework\Filesystem\Io\File as FileSystem;
 use Magento\Framework\ObjectManager\FactoryInterface;
-use Staempfli\Pdf\Api\Pdf;
+use Staempfli\Pdf\Service\Pdf;
 use Staempfli\Pdf\Api\PdfEngine;
-use Staempfli\Pdf\Api\PdfOptions;
+use Staempfli\Pdf\Service\PdfOptions;
 
 class PdfFactory
 {

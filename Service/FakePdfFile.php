@@ -1,5 +1,6 @@
 <?php
-namespace Staempfli\Pdf\Api;
+namespace Staempfli\Pdf\Service;
+use Staempfli\Pdf\Api\PdfFile;
 
 /**
  * Fake implementation returned by FakePdfEngine

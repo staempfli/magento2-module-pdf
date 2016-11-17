@@ -1,12 +1,12 @@
 <?php
-namespace Staempfli\Pdf\Test\Unit\Api;
+namespace Staempfli\Pdf\Test\Unit\Service;
 
-use Staempfli\Pdf\Api\FakePdfEngine;
-use Staempfli\Pdf\Api\PdfOptions;
-use Staempfli\Pdf\Api\PdfAppendContent;
-use Staempfli\Pdf\Api\FakeSourceDocument;
+use Staempfli\Pdf\Service\FakePdfEngine;
+use Staempfli\Pdf\Service\PdfOptions;
+use Staempfli\Pdf\Service\PdfAppendContent;
+use Staempfli\Pdf\Service\FakeSourceDocument;
 
-class WkSourceDocumentTest extends \PHPUnit_Framework_TestCase
+class FakeSourceDocumentTest extends \PHPUnit_Framework_TestCase
 {
     public function testPrintToMedium()
     {

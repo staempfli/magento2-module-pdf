@@ -1,5 +1,8 @@
 <?php
-namespace Staempfli\Pdf\Api;
+namespace Staempfli\Pdf\Service;
+use Staempfli\Pdf\Api\Medium;
+use Staempfli\Pdf\Service\PdfOptions;
+use Staempfli\Pdf\Api\SourceDocument;
 
 /**
  * Minimal implementation of SourceDocument. Clients should provide their own implementation

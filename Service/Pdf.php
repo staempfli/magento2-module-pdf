@@ -1,5 +1,14 @@
 <?php
-namespace Staempfli\Pdf\Api;
+namespace Staempfli\Pdf\Service;
+
+use Staempfli\Pdf\Api\Options;
+use Staempfli\Pdf\Service\PdfAppendContent;
+use Staempfli\Pdf\Service\PdfCover;
+use Staempfli\Pdf\Api\PdfEngine;
+use Staempfli\Pdf\Api\PdfFile;
+use Staempfli\Pdf\Service\PdfOptions;
+use Staempfli\Pdf\Service\PdfTableOfContents;
+use Staempfli\Pdf\Api\SourceDocument;
 
 class Pdf
 {

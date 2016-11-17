@@ -1,7 +1,8 @@
 <?php
-namespace Staempfli\Pdf\Api;
+namespace Staempfli\Pdf\Service;
 
 use \ArrayObject;
+use Staempfli\Pdf\Api\Options;
 
 /**
  * Constants are provided for convenience. For a full list of options, see

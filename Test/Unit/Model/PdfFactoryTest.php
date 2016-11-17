@@ -2,9 +2,9 @@
 namespace Staempfli\Pdf\Test\Unit\Model;
 
 
-use Staempfli\Pdf\Api\FakePdfEngine;
-use Staempfli\Pdf\Api\Pdf;
-use Staempfli\Pdf\Api\PdfOptions;
+use Staempfli\Pdf\Service\FakePdfEngine;
+use Staempfli\Pdf\Service\Pdf;
+use Staempfli\Pdf\Service\PdfOptions;
 use Staempfli\Pdf\Block\PdfTemplate;
 use Staempfli\Pdf\Model\PdfFactory;
 

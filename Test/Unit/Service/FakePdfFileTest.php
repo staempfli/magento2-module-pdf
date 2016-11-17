@@ -1,9 +1,9 @@
 <?php
-namespace Staempfli\Pdf\Test\Unit\Api;
+namespace Staempfli\Pdf\Test\Unit\Service;
 
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamFile;
-use Staempfli\Pdf\Api\FakePdfFile;
+use Staempfli\Pdf\Service\FakePdfFile;
 
 class FakePdfFileTest extends \PHPUnit_Framework_TestCase
 {

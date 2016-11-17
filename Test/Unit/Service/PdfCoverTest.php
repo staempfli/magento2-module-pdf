@@ -1,9 +1,9 @@
 <?php
-namespace Staempfli\Pdf\Test\Unit\Api;
+namespace Staempfli\Pdf\Test\Unit\Service;
 
-use Staempfli\Pdf\Api\FakePdfEngine;
-use Staempfli\Pdf\Api\PdfCover;
-use Staempfli\Pdf\Api\PdfOptions;
+use Staempfli\Pdf\Service\FakePdfEngine;
+use Staempfli\Pdf\Service\PdfCover;
+use Staempfli\Pdf\Service\PdfOptions;
 
 class PdfCoverTest extends \PHPUnit_Framework_TestCase
 {

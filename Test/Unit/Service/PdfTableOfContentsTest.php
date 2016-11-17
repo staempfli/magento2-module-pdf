@@ -1,11 +1,11 @@
 <?php
-namespace Staempfli\Pdf\Test\Unit\Api;
+namespace Staempfli\Pdf\Test\Unit\Service;
 
-use Staempfli\Pdf\Api\FakePdfEngine;
-use Staempfli\Pdf\Api\PdfOptions;
-use Staempfli\Pdf\Api\PdfTableOfContents;
+use Staempfli\Pdf\Service\FakePdfEngine;
+use Staempfli\Pdf\Service\PdfOptions;
+use Staempfli\Pdf\Service\PdfTableOfContents;
 
-class WkTableOfContentsTest extends \PHPUnit_Framework_TestCase
+class PdfTableOfContentsTest extends \PHPUnit_Framework_TestCase
 {
     /** @var FakePdfEngine */
     private $pdfEngine;
@@ -14,7 +14,7 @@ class WkTableOfContentsTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->pdfEngine = new FakePdfEngine();
+        $this->pdfEngine = new \Staempfli\Pdf\Service\FakePdfEngine();
         $this->tableOfContents = new PdfTableOfContents($this->pdfEngine);
     }
     public function testPrintToc()

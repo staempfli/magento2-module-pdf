@@ -1,9 +1,9 @@
 <?php
-namespace Staempfli\Pdf\Test\Unit\Api;
+namespace Staempfli\Pdf\Test\Unit\Service;
 
-use Staempfli\Pdf\Api\PdfOptions;
+use Staempfli\Pdf\Service\PdfOptions;
 
-class WkOptionsTest extends \PHPUnit_Framework_TestCase
+class PdfOptionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider dataMerge

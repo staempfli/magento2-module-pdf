@@ -10,12 +10,24 @@ use Staempfli\Pdf\Api\Options;
  */
 final class PdfOptions extends ArrayObject implements Options
 {
-    // global options
+    // system wide options
     const KEY_BINARY = 'binary';
     const KEY_VERSION9 = 'version9';
     const KEY_TMP_DIR = 'tmpDir';
-    const KEY_CLI_OPTIONS = 'commandOptions';
     const KEY_IGNORE_WARNINGS = 'ignoreWarnings';
+    const KEY_CLI_OPTIONS = 'commandOptions';
+    const CLI_OPTIONS_KEY_ESCAPE_ARGS = 'escapeArgs';
+    const CLI_OPTIONS_KEY_USE_EXEC = 'useExec';
+    const CLI_OPTIONS_KEY_USE_XVFB_RUN = 'enableXvfb';
+    const CLI_OPTIONS_KEY_XVFB_RUN_BINARY = 'xvfbRunBinary';
+    const CLI_OPTIONS_KEY_XVFB_RUN_OPTIONS = 'xvfbRunOptions';
+    /*
+     * for more CLI options, see public properties of
+     *
+     *   \mikehaertl\shellcommand\Command
+     */
+
+    // file wide options
     const KEY_TITLE = 'title';
     const KEY_PAGE_SIZE = 'page-size';
     const KEY_PAGE_HEIGHT = 'page-height';
@@ -37,7 +49,7 @@ final class PdfOptions extends ArrayObject implements Options
     const FLAG_FOOTER_LINE = 'footer-line';
     const KEY_HEADER_FOOTER_REPLACE_MAP = 'replace';
 
-    // page options
+    // html page wide options
     const KEY_RUN_SCRIPTS = 'run-script';
     const KEY_COOKIES = 'cookie';
     const KEY_ENCODING = 'encoding';

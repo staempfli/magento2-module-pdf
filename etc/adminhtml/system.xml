@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="staempfli_pdf" translate="label" type="text" sortOrder="40" showInDefault="1">
+            <class>separator-top</class>
+            <label>PDF Generation</label>
+            <tab>advanced</tab>
+            <resource>Staempfli_Pdf::config_staempfli_pdf</resource>
+            <group id="system" translate="label" type="text" sortOrder="90" showInDefault="1">
+                <label>System</label>
+                <field id="binary" translate="label comment" type="text" sortOrder="10" showInDefault="1" canRestore="1">
+                    <label>wkhtmltopdf binary</label>
+                    <comment>Full path to wkhtmltopdf binary</comment>
+                </field>
+                <field id="tmp_dir" translate="label comment" type="text" sortOrder="10" showInDefault="1" canRestore="1">
+                    <label>Temporary directory</label>
+                    <comment>Output directory for wkhtmltopdf. Leave empty to use system tmp dir</comment>
+                </field>
+                <field id="version9" translate="label comment" type="select" sortOrder="20" showInDefault="1" canRestore="1">
+                    <label>"version9" Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Whether to use command line syntax for older wkhtmltopdf versions</comment>
+                </field>
+                <field id="ignore_warnings" translate="label comment" type="select" sortOrder="30" showInDefault="1" canRestore="1">
+                    <label>Ignore warnings</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Ignore warnings of wkhtmltopdf</comment>
+                </field>
+                <field id="escape_args" translate="label comment" type="select" sortOrder="40" showInDefault="1" canRestore="1">
+                    <label>Escape shell arguments</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Whether to escape wkhtmltopdf shell arguments (Default: yes)</comment>
+                </field>
+                <field id="use_exec" translate="label comment" type="select" sortOrder="50" showInDefault="1" canRestore="1">
+                    <label>Use "exec" instead of "proc_open"</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Only set to "yes", if "proc_open" does not work on your system (e.g. on Windows)</comment>
+                </field>
+                <field id="enable_xvfb" translate="label comment" type="select" sortOrder="60" showInDefault="1" canRestore="1">
+                    <label>Use built-in Xvfb support</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Use xvfb-run to wrap each call in a new Xvfb session, so you don't need a running Xvfb process (only recommended for low frequency sites)</comment>
+                </field>
+                <field id="xvfb_run_binary" translate="label comment" type="text" sortOrder="61" showInDefault="1" canRestore="1">
+                    <label>xvfb-run binary</label>
+                    <comment>Full path to the xvfb-run binary</comment>
+                    <depends>
+                        <field id="enable_xvfb">1</field>
+                    </depends>
+                </field>
+                <field id="xvfb_run_options" translate="label comment" type="text" sortOrder="62" showInDefault="1" canRestore="1">
+                    <label>xvfb-run command line options</label>
+                    <comment>Default: --server-args="-screen 0, 1024x768x24"</comment>
+                    <depends>
+                        <field id="enable_xvfb">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

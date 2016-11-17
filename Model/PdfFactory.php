@@ -1,10 +1,9 @@
 <?php
 namespace Staempfli\Pdf\Model;
 
-use Magento\Framework\Filesystem\Io\File as FileSystem;
-use Magento\Framework\ObjectManager\FactoryInterface;
-use Staempfli\Pdf\Service\Pdf;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Staempfli\Pdf\Api\PdfEngine;
+use Staempfli\Pdf\Service\Pdf;
 use Staempfli\Pdf\Service\PdfOptions;
 
 class PdfFactory
@@ -13,22 +12,42 @@ class PdfFactory
      * @var PdfEngine
      */
     protected $pdfEngine;
+    /**
+     * @var ScopeConfigInterface
+     */
+    private $scopeConfig;
 
-    public function __construct(PdfEngine $pdfEngine)
+    public function __construct(PdfEngine $pdfEngine, ScopeConfigInterface $scopeConfig)
     {
         $this->pdfEngine = $pdfEngine;
+        $this->scopeConfig = $scopeConfig;
     }
 
     public function create()
     {
-        $builder = new Pdf($this->pdfEngine);
-        $builder->setOptions($this->optionsFromConfig());
-        return $builder;
+        $pdf = new Pdf($this->pdfEngine);
+        $pdf->setOptions($this->optionsFromConfig());
+        return $pdf;
     }
 
     private function optionsFromConfig()
     {
-        //TODO retrieve global options from system configuration
-        return new PdfOptions();
+        $config = function($xpath) {
+            return $this->scopeConfig->getValue($xpath);
+        };
+        return new PdfOptions(
+            [
+                PdfOptions::KEY_BINARY => $config(Config::XML_PATH_BINARY),
+                PdfOptions::KEY_VERSION9 => $config(Config::XML_PATH_VERSION9),
+                PdfOptions::KEY_TMP_DIR => $config(Config::XML_PATH_TMP_DIR),
+                PdfOptions::KEY_CLI_OPTIONS => [
+                    PdfOptions::CLI_OPTIONS_KEY_ESCAPE_ARGS => $config(Config::XML_PATH_ESCAPE_ARGS),
+                    PdfOptions::CLI_OPTIONS_KEY_USE_EXEC => $config(Config::XML_PATH_USE_EXEC),
+                    PdfOptions::CLI_OPTIONS_KEY_XVFB_RUN_OPTIONS => $config(Config::XML_PATH_XVFB_RUN_OPTIONS),
+                    PdfOptions::CLI_OPTIONS_KEY_XVFB_RUN_BINARY => $config(Config::XML_PATH_XVFB_RUN_BINARY),
+                    PdfOptions::CLI_OPTIONS_KEY_USE_XVFB_RUN => $config(Config::XML_PATH_USE_XVFB_RUN),
+                ]
+            ]
+        );
     }
 }

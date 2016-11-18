@@ -10,7 +10,7 @@
                 <label>System</label>
                 <field id="binary" translate="label comment" type="text" sortOrder="10" showInDefault="1" canRestore="1">
                     <label>wkhtmltopdf binary</label>
-                    <comment>Full path to wkhtmltopdf binary</comment>
+                    <comment>Full path to wkhtmltopdf binary. If empty, "wkhtmltopdf" should be available in system path</comment>
                 </field>
                 <field id="tmp_dir" translate="label comment" type="text" sortOrder="10" showInDefault="1" canRestore="1">
                     <label>Temporary directory</label>
@@ -43,14 +43,14 @@
                 </field>
                 <field id="xvfb_run_binary" translate="label comment" type="text" sortOrder="61" showInDefault="1" canRestore="1">
                     <label>xvfb-run binary</label>
-                    <comment>Full path to the xvfb-run binary</comment>
+                    <comment>Full path to the xvfb-run binary. If empty, "xvfb-run" should be available in system path</comment>
                     <depends>
                         <field id="enable_xvfb">1</field>
                     </depends>
                 </field>
                 <field id="xvfb_run_options" translate="label comment" type="text" sortOrder="62" showInDefault="1" canRestore="1">
                     <label>xvfb-run command line options</label>
-                    <comment>Default: --server-args="-screen 0, 1024x768x24"</comment>
+                    <comment>Default: -a --server-args="-screen 0, 1024x768x24"</comment>
                     <depends>
                         <field id="enable_xvfb">1</field>
                     </depends>

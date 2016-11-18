@@ -2,17 +2,30 @@
 namespace Staempfli\Pdf\Adapter;
 
 
-use Staempfli\Pdf\Api\PdfFile;
-use Staempfli\Pdf\Api\Medium;
+use mikehaertl\wkhtmlto\Pdf;
 use Staempfli\Pdf\Api\Options;
 use Staempfli\Pdf\Api\PdfEngine;
-use Staempfli\Pdf\Api\TableOfContents;
+use Staempfli\Pdf\Api\PdfFile;
 
 final class WkPdfEngine implements PdfEngine
 {
+    /** @var Pdf */
+    private $wkPdf;
+
+    public function __construct(Pdf $wkPdf)
+    {
+        $this->wkPdf = $wkPdf;
+    }
+
     public function addPage($html, Options $options)
     {
-        // TODO: Implement addPage() method.
+        /*
+         * Make sure, it is recognized as HTML, not file or URL
+         */
+        if (! preg_match(Pdf::REGEX_HTML, $html) && ! preg_match(Pdf::REGEX_XML, $html)) {
+            $html = sprintf('<html>%s</html>', $html);
+        }
+        $this->wkPdf->addPage($html, $options->asArray());
     }
 
     public function setCover($html, Options $options)
@@ -31,9 +44,12 @@ final class WkPdfEngine implements PdfEngine
      */
     public function generatePdf(Options $globalOptions)
     {
-        // TODO: Implement generatePdf() method.
-        // this is the adapter to the actual PDF generating library.
-        // Always use mock/fake in unit tests, only integration test for this
+        /*
+         * No factory here, WkPdfEngine and WkPdfFile are tightly coupled and should only be exchanged together
+         */
+        $wkPdf = clone $this->wkPdf;
+        $wkPdf->setOptions($globalOptions->asArray());
+        return new WkPdfFile($wkPdf);
     }
 
 }

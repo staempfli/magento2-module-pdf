@@ -8,7 +8,7 @@ interface PdfEngine
      *
      * @param $html
      * @param Options $options
-     * @return mixed
+     * @return void
      */
     public function addPage($html, Options $options);
 
@@ -17,7 +17,7 @@ interface PdfEngine
      *
      * @param $html
      * @param Options $options
-     * @return mixed
+     * @return void
      */
     public function setCover($html, Options $options);
 
@@ -25,7 +25,7 @@ interface PdfEngine
      * Add table of contents with given options
      *
      * @param Options $options
-     * @return mixed
+     * @return void
      */
     public function setTableOfContents(Options $options);
 

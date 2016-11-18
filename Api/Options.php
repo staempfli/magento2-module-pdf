@@ -13,4 +13,11 @@ interface Options extends \ArrayAccess, \Traversable
      * @return Options
      */
     public function merge(Options $newOptions);
+
+    /**
+     * Return options as associative array
+     *
+     * @return array
+     */
+    public function asArray();
 }

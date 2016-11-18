@@ -5,6 +5,15 @@ use Staempfli\Pdf\Service\PdfOptions;
 
 class PdfOptionsTest extends \PHPUnit_Framework_TestCase
 {
+    public function testToArray()
+    {
+        $array = [
+            'some-key' => 'some-value',
+            'other-key' => 'other-value',
+        ];
+        $options = new PdfOptions($array);
+        $this->assertEquals($array, $options->asArray());
+    }
     /**
      * @dataProvider dataMerge
      * @param $originalValues

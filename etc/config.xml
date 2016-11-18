@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <staempfli_pdf>
+            <system>
+                <escape_args>1</escape_args>
+                <enable_xvfb>1</enable_xvfb>
+                <xvfb_run_options>-a --server-args="-screen 0, 1024x768x24"</xvfb_run_options>
+            </system>
+        </staempfli_pdf>
+    </default>
+</config>

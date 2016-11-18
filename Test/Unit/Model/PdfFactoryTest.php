@@ -47,6 +47,22 @@ class PdfFactoryTest extends \PHPUnit_Framework_TestCase
         return [
             'default' => [
                 'scope_config_value_map' => [
+                    [Config::XML_PATH_BINARY, $default, null, null],
+                    [Config::XML_PATH_VERSION9, $default, null, null],
+                    [Config::XML_PATH_TMP_DIR, $default, null, null],
+                    [Config::XML_PATH_ESCAPE_ARGS, $default, null, null],
+                    [Config::XML_PATH_USE_EXEC, $default, null, null],
+                    [Config::XML_PATH_USE_XVFB_RUN, $default, null, null],
+                    [Config::XML_PATH_XVFB_RUN_BINARY, $default, null, null],
+                    [Config::XML_PATH_XVFB_RUN_OPTIONS, $default, null, null],
+                ],
+                'expected_options' => [
+                    PdfOptions::KEY_CLI_OPTIONS => [
+                    ]
+                ]
+            ],
+            'all' => [
+                'scope_config_value_map' => [
                     [Config::XML_PATH_BINARY, $default, null, '/usr/bin/wkpdf2html'],
                     [Config::XML_PATH_VERSION9, $default, null, true],
                     [Config::XML_PATH_TMP_DIR, $default, null, '/tmp/wkpdf'],

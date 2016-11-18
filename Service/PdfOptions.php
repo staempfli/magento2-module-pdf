@@ -75,4 +75,9 @@ final class PdfOptions extends ArrayObject implements Options
         return $merged;
     }
 
+    public function asArray()
+    {
+        return (array) $this;
+    }
+
 }

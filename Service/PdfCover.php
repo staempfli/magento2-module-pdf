@@ -20,6 +20,6 @@ final class PdfCover implements Medium
 
     public function printHtml($html, Options $options)
     {
-        $this->pdfEngine->setCover($html, $options);
+        $this->pdfEngine->addCover($html, $options);
     }
 }

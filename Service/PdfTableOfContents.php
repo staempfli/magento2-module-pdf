@@ -19,7 +19,7 @@ final class PdfTableOfContents implements TableOfContents
 
     public function printToc(Options $options)
     {
-        $this->pdfEngine->setTableOfContents($options);
+        $this->pdfEngine->addTableOfContents($options);
     }
 
 }

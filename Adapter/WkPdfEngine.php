@@ -31,12 +31,12 @@ final class WkPdfEngine implements PdfEngine
         $this->wkPdf->addPage($this->html($html), $options->asArray());
     }
 
-    public function setCover($html, Options $options)
+    public function addCover($html, Options $options)
     {
         $this->wkPdf->addCover($this->html($html), $options->asArray());
     }
 
-    public function setTableOfContents(Options $options)
+    public function addTableOfContents(Options $options)
     {
         $this->wkPdf->addToc($options->asArray());
     }

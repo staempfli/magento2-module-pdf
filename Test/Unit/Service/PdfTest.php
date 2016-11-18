@@ -47,7 +47,7 @@ class PdfTest extends \PHPUnit_Framework_TestCase
     public function testBuildWithTableOfContents()
     {
         $this->assertFalse($this->fakePdfEngine->fakePdfFile->isGenerated);
-        $this->pdf->setTableOfContents(new PdfOptions(['toc' => 'tic']));
+        $this->pdf->appendTableOfContents(new PdfOptions(['toc' => 'tic']));
 
         $this->assertInstanceOf(PdfFile::class, $this->pdf->file());
         $this->assertTrue($this->fakePdfEngine->fakePdfFile->isGenerated);
@@ -69,7 +69,7 @@ class PdfTest extends \PHPUnit_Framework_TestCase
     }
     public function testSetCover()
     {
-        $this->pdf->setCover(new FakeSourceDocument('Cover HTML source', new PdfOptions(['looks' => 'great'])));
+        $this->pdf->appendCover(new FakeSourceDocument('Cover HTML source', new PdfOptions(['looks' => 'great'])));
         $this->pdf->file();
         $this->assertEquals(['Cover HTML source', new PdfOptions(['looks' => 'great'])], $this->fakePdfEngine->cover);
     }
@@ -77,12 +77,12 @@ class PdfTest extends \PHPUnit_Framework_TestCase
     {
         $this->pdf->setHeaderHtml('Header HTML source');
         $this->pdf->file();
-        $this->assertEquals('Header HTML source', $this->fakePdfEngine->globalOptions[PdfOptions::KEY_HEADER_HTML]);
+        $this->assertEquals('Header HTML source', $this->fakePdfEngine->globalOptions[PdfOptions::KEY_HEADER_HTML_URL]);
     }
     public function testSetFooterHtml()
     {
         $this->pdf->setFooterHtml('Footer HTML source');
         $this->pdf->file();
-        $this->assertEquals('Footer HTML source', $this->fakePdfEngine->globalOptions[PdfOptions::KEY_FOOTER_HTML]);
+        $this->assertEquals('Footer HTML source', $this->fakePdfEngine->globalOptions[PdfOptions::KEY_FOOTER_HTML_URL]);
     }
 }

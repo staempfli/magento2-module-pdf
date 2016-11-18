@@ -35,8 +35,8 @@ class WkPdfEngineTest extends \PHPUnit_Framework_TestCase
     public function testGeneratePdf()
     {
         $pdf = $this->pdfFactory->create();
-        $pdf->setCover(new FakeSourceDocument('<body>BIG COVER</body>', new PdfOptions([])));
-        $pdf->setTableOfContents(new PdfOptions([]));
+        $pdf->appendCover(new FakeSourceDocument('<body>BIG COVER</body>', new PdfOptions([])));
+        $pdf->appendTableOfContents(new PdfOptions([]));
         $pdf->appendContent(new FakeSourceDocument('<body>print me!</body>', new PdfOptions([])));
         $this->assertStringStartsWith('%PDF-', $pdf->file()->toString(), 'binary string should contain the PDF header');
     }
@@ -67,8 +67,8 @@ class WkPdfEngineTest extends \PHPUnit_Framework_TestCase
                 PdfOptions::KEY_FOOTER_TEXT_RIGHT => 'I am text based.'
             ]
         ));
-        $pdf->setCover(new FakeSourceDocument('<body>BIG COVER</body>', new PdfOptions([])));
-        $pdf->setTableOfContents(new PdfOptions([
+        $pdf->appendCover(new FakeSourceDocument('<body>BIG COVER</body>', new PdfOptions([])));
+        $pdf->appendTableOfContents(new PdfOptions([
         ]));
         $contentHtml = <<<'HTML'
 <!DOCTYPE html>

@@ -55,7 +55,7 @@ class Pdf
      * @see http://wkhtmltopdf.org/usage/wkhtmltopdf.txt
      * @param Options $tocOptions
      */
-    public function setTableOfContents(Options $tocOptions)
+    public function appendTableOfContents(Options $tocOptions)
     {
         $toc = new PdfTableOfContents($this->engine);
         $toc->printToc($tocOptions);
@@ -81,7 +81,7 @@ class Pdf
      * @see http://wkhtmltopdf.org/usage/wkhtmltopdf.txt
      * @param SourceDocument $source
      */
-    public function setCover(SourceDocument $source)
+    public function appendCover(SourceDocument $source)
     {
         $source->printTo(new PdfCover($this->engine));
     }
@@ -109,7 +109,7 @@ class Pdf
      */
     public function setHeaderHtml($html)
     {
-        $this->options[PdfOptions::KEY_HEADER_HTML] = $html;
+        $this->options[PdfOptions::KEY_HEADER_HTML_URL] = $html;
     }
 
     /**
@@ -135,7 +135,7 @@ class Pdf
      */
     public function setFooterHtml($html)
     {
-        $this->options[PdfOptions::KEY_FOOTER_HTML] = $html;
+        $this->options[PdfOptions::KEY_FOOTER_HTML_URL] = $html;
     }
 
     /**

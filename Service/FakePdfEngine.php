@@ -39,12 +39,12 @@ class FakePdfEngine implements PdfEngine
         $this->pages[] = [$html, $options];
     }
 
-    public function setCover($html, Options $options)
+    public function addCover($html, Options $options)
     {
         $this->cover = [$html, $options];
     }
 
-    public function setTableOfContents(Options $options)
+    public function addTableOfContents(Options $options)
     {
         $this->tableOfContents = $options;
     }

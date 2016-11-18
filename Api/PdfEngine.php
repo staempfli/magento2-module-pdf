@@ -13,21 +13,21 @@ interface PdfEngine
     public function addPage($html, Options $options);
 
     /**
-     * Set HTML content as cover page
+     * Append HTML content as cover page
      *
      * @param $html
      * @param Options $options
      * @return void
      */
-    public function setCover($html, Options $options);
+    public function addCover($html, Options $options);
 
     /**
-     * Add table of contents with given options
+     * Append table of contents with given options
      *
      * @param Options $options
      * @return void
      */
-    public function setTableOfContents(Options $options);
+    public function addTableOfContents(Options $options);
 
     /**
      * @param Options $globalOptions

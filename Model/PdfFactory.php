@@ -25,7 +25,7 @@ class PdfFactory
 
     public function create()
     {
-        $pdf = new Pdf(clone $this->pdfEngine);
+        $pdf = new Pdf($this->pdfEngine);
         $pdf->setOptions($this->optionsFromConfig());
         return $pdf;
     }

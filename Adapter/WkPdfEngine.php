@@ -7,6 +7,10 @@ use Staempfli\Pdf\Api\Options;
 use Staempfli\Pdf\Api\PdfEngine;
 use Staempfli\Pdf\Api\PdfFile;
 
+/**
+ * This is the adapter to the actual PDF generating library.
+ * Always use mock/fake in unit tests, only integration test for this
+ */
 final class WkPdfEngine implements PdfEngine
 {
     /** @var Pdf */
@@ -17,25 +21,24 @@ final class WkPdfEngine implements PdfEngine
         $this->wkPdf = $wkPdf;
     }
 
+    public function __clone()
+    {
+        $this->wkPdf = clone $this->wkPdf;
+    }
+
     public function addPage($html, Options $options)
     {
-        /*
-         * Make sure, it is recognized as HTML, not file or URL
-         */
-        if (! preg_match(Pdf::REGEX_HTML, $html) && ! preg_match(Pdf::REGEX_XML, $html)) {
-            $html = sprintf('<html>%s</html>', $html);
-        }
-        $this->wkPdf->addPage($html, $options->asArray());
+        $this->wkPdf->addPage($this->html($html), $options->asArray());
     }
 
     public function setCover($html, Options $options)
     {
-        // TODO: Implement setCover() method.
+        $this->wkPdf->addCover($this->html($html), $options->asArray());
     }
 
     public function setTableOfContents(Options $options)
     {
-        // TODO: Implement setTableOfContents() method.
+        $this->wkPdf->addToc($options->asArray());
     }
 
     /**
@@ -50,6 +53,20 @@ final class WkPdfEngine implements PdfEngine
         $wkPdf = clone $this->wkPdf;
         $wkPdf->setOptions($globalOptions->asArray());
         return new WkPdfFile($wkPdf);
+    }
+
+    /**
+     * Make sure, string is recognized as HTML, not file or URL
+     *
+     * @param $html
+     * @return string
+     */
+    private function html($html)
+    {
+        if (!preg_match(Pdf::REGEX_HTML, $html) && !preg_match(Pdf::REGEX_XML, $html)) {
+            return sprintf('<html>%s</html>', $html);
+        }
+        return $html;
     }
 
 }

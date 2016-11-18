@@ -1,12 +1,13 @@
 <?php
 namespace Staempfli\Pdf\Adapter;
 
-// TODO implement
-// this is the adapter to the actual PDF generating library.
-// Always use mock/fake in unit tests, only integration test for this
 use mikehaertl\wkhtmlto\Pdf;
 use Staempfli\Pdf\Api\PdfFile;
 
+/**
+ * This is the adapter to the actual PDF generating library.
+ * Always use mock/fake in unit tests, only integration test for this
+ */
 final class WkPdfFile implements PdfFile
 {
     /** @var Pdf */
@@ -19,12 +20,12 @@ final class WkPdfFile implements PdfFile
 
     public function saveAs($path)
     {
-        // TODO: Implement saveAs() method.
+        return $this->wkPdf->saveAs($path);
     }
 
     public function send()
     {
-        // TODO: Implement send() method.
+        return $this->wkPdf->send();
     }
 
     public function toString()

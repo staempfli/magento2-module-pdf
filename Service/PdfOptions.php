@@ -37,14 +37,26 @@ final class PdfOptions extends ArrayObject implements Options
     const KEY_MARGIN_LEFT = 'margin-left';
     const KEY_MARGIN_RIGHT = 'margin-right';
     const KEY_MARGIN_TOP = 'margin-top';
+    /**
+     * HTML header, should be URL or filename, or a string containing "<html"
+     */
     const KEY_HEADER_HTML = 'header-html';
     const KEY_HEADER_TEXT_LEFT = 'header-left';
     const KEY_HEADER_TEXT_RIGHT = 'header-right';
+    /**
+     * Spacing between header and content in mm (default 0)
+     */
     const KEY_HEADER_SPACING = 'header-spacing';
     const FLAG_HEADER_LINE = 'header-line';
+    /**
+     * HTML footer, should be URL or filename, or a string containing "<html"
+     */
     const KEY_FOOTER_HTML = 'footer-html';
     const KEY_FOOTER_TEXT_LEFT = 'footer-left';
     const KEY_FOOTER_TEXT_RIGHT = 'footer-right';
+    /**
+     * Spacing between footer and content in mm (default 0)
+     */
     const KEY_FOOTER_SPACING = 'footer-spacing';
     const FLAG_FOOTER_LINE = 'footer-line';
     const KEY_HEADER_FOOTER_REPLACE_MAP = 'replace';

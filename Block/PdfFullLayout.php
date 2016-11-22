@@ -17,6 +17,9 @@ use Staempfli\Pdf\Api\OptionsFactory as PdfOptionsFactory;
  */
 use Magento\Framework\View\Page\Config;
 
+/**
+ * @deprecated remove as soon as PdfResult/PdfResponse is fully functional
+ */
 class PdfFullLayout extends PdfTemplate
 {
     protected $_template = 'Magento_Theme::root.phtml';

@@ -33,15 +33,33 @@ final class PdfOptions extends ArrayObject implements Options
     const KEY_PAGE_HEIGHT = 'page-height';
     const KEY_PAGE_WIDTH = 'page-width';
     const KEY_ORIENTATION = 'orientation';
+    /**
+     * Bottom margin in mm (default 10)
+     */
     const KEY_MARGIN_BOTTOM = 'margin-bottom';
+    /**
+     * Left margin in mm (default 10)
+     */
     const KEY_MARGIN_LEFT = 'margin-left';
+    /**
+     * Right margin in mm (default 10)
+     */
     const KEY_MARGIN_RIGHT = 'margin-right';
+    /**
+     * Top margin in mm (default 10)
+     */
     const KEY_MARGIN_TOP = 'margin-top';
     /**
      * HTML header, should be URL or filename
      */
     const KEY_HEADER_HTML_URL = 'header-html';
+    /**
+     * Header text printed in the top margin (not visible if margin is 0)
+     */
     const KEY_HEADER_TEXT_LEFT = 'header-left';
+    /**
+     * Header text printed in the top margin (not visible if margin is 0)
+     */
     const KEY_HEADER_TEXT_RIGHT = 'header-right';
     /**
      * Spacing between header and content in mm (default 0)
@@ -52,7 +70,13 @@ final class PdfOptions extends ArrayObject implements Options
      * HTML footer, should be URL or filename
      */
     const KEY_FOOTER_HTML_URL = 'footer-html';
+    /**
+     * Footer text printed in the bottom margin (not visible if margin is 0)
+     */
     const KEY_FOOTER_TEXT_LEFT = 'footer-left';
+    /**
+     * Footer text printed in the bottom margin (not visible if margin is 0)
+     */
     const KEY_FOOTER_TEXT_RIGHT = 'footer-right';
     /**
      * Spacing between footer and content in mm (default 0)

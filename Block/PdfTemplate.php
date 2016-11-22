@@ -15,13 +15,15 @@ use Staempfli\Pdf\Api\SourceDocument;
  *
  * By default it uses the container template, so that it renders all children. The children do not need to be PdfTemplates,
  * they can be any Magento blocks.
+ *
+ * If you want to use the full Magento layout with HTML head (CSS, JS), use PdfFullLayout instead
  */
 class PdfTemplate extends Template implements SourceDocument
 {
     protected $_template = 'Magento_Theme::html/container.phtml';
 
     /** @var Options */
-    private $pdfOptions;
+    protected $pdfOptions;
 
     public function __construct(Template\Context $context, PdfOptionsFactory $optionsFactory, array $data = [])
     {

@@ -75,6 +75,25 @@ final class PdfOptions extends ArrayObject implements Options
     const ENCODING_UTF_8 = 'UTF-8';
 
     /**
+     * PdfOptions constructor.
+     *
+     * Overridden from ArrayObject for default input parameter. This prevents error
+     *
+     *     Passed variable is not an array or object, using empty array instead
+     *
+     * while used with Magento 2 object manager
+     *
+     * @param array $input
+     * @param int $flags
+     * @param string $iterator_class
+     */
+    public function __construct($input = [], $flags = 0, $iterator_class = \ArrayIterator::class)
+    {
+        parent::__construct($input, $flags, $iterator_class);
+    }
+
+
+    /**
      * @param Options $newOptions
      * @return PdfOptions
      */

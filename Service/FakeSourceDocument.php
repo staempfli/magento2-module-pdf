@@ -1,7 +1,7 @@
 <?php
 namespace Staempfli\Pdf\Service;
 use Staempfli\Pdf\Api\Medium;
-use Staempfli\Pdf\Service\PdfOptions;
+use Staempfli\Pdf\Api\Options;
 use Staempfli\Pdf\Api\SourceDocument;
 
 /**
@@ -16,9 +16,9 @@ final class FakeSourceDocument implements SourceDocument
 
     /**
      * @param string $html
-     * @param PdfOptions $options
+     * @param Options $options
      */
-    public function __construct($html, PdfOptions $options)
+    public function __construct($html, Options $options)
     {
         $this->html = $html;
         $this->options = $options;

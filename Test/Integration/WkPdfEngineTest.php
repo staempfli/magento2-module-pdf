@@ -2,7 +2,6 @@
 namespace Staempfli\Pdf\Test\Integration;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\TestFramework\ObjectManager;
-use mikehaertl\tmp\File;
 use Staempfli\Pdf\Model\Config;
 use Staempfli\Pdf\Model\PdfFactory;
 use Staempfli\Pdf\Service\FakeSourceDocument;
@@ -80,7 +79,8 @@ class WkPdfEngineTest extends \PHPUnit_Framework_TestCase
 HTML;
         $pdf->appendContent(new FakeSourceDocument($contentHtml, new PdfOptions([])));
         $pdf->file()->saveAs('tmp/staempflitest.pdf');
-        $this->assertNotEmpty(realpath('tmp/staempflitest.pdf'), 'File tmp/staempflitest.pdf should be saved');
+        $this->assertNotEmpty(\realpath('tmp/staempflitest.pdf'), 'File tmp/staempflitest.pdf should be saved');
+        $this->assertGreaterThan(10000, \filesize(\realpath('tmp/staempflitest.pdf')), 'File tmp/staempflitest.pdf should be > 10 KB');
     }
 
     /**

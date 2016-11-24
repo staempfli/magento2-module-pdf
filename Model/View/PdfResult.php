@@ -3,6 +3,7 @@ namespace Staempfli\Pdf\Model\View;
 
 use Magento\Framework;
 use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\View;
 use Magento\Framework\View\Element\Template\Context as TemplateContext;
 use Magento\Framework\View\Result\Page as PageResult;
@@ -15,7 +16,7 @@ use Staempfli\Pdf\Model\PdfResponseFactory;
  *
  * For more advanced options, use renderSourceDocument() to get a source document you can pass into the Pdf service
  */
-class PdfResult extends PageResult
+class PdfResult extends Framework\Controller\AbstractResult
 {
     const TYPE = 'pdf';
 
@@ -25,23 +26,14 @@ class PdfResult extends PageResult
     private $pdfFactory;
     /** @var string */
     private $filename = null;
+    /** @var PageResultWithoutHttp */
+    private $pageResult;
 
-    public function __construct(PdfResponseFactory $pdfResponseFactory, PdfFactory $pdfFactory, TemplateContext $context,
-                                View\LayoutFactory $layoutFactory, View\Layout\ReaderPool $layoutReaderPool,
-                                Framework\Translate\InlineInterface $translateInline,
-                                View\Layout\BuilderFactory $layoutBuilderFactory,
-                                View\Layout\GeneratorPool $generatorPool,
-                                View\Page\Config\RendererFactory $pageConfigRendererFactory,
-                                View\Page\Layout\Reader $pageLayoutReader,
-                                $template,
-                                $isIsolated = false)
+    public function __construct(PdfResponseFactory $pdfResponseFactory, PdfFactory $pdfFactory, PageResultWithoutHttp $pageResult)
     {
-        parent::__construct(
-            $context, $layoutFactory, $layoutReaderPool, $translateInline, $layoutBuilderFactory,
-            $generatorPool, $pageConfigRendererFactory, $pageLayoutReader, $template, $isIsolated
-        );
         $this->pdfResponseFactory = $pdfResponseFactory;
         $this->pdfFactory = $pdfFactory;
+        $this->pageResult = $pageResult;
     }
 
     /**
@@ -75,7 +67,7 @@ class PdfResult extends PageResult
     {
         /** @var PdfResponse $pdfResponse */
         $pdfResponse = $this->pdfResponseFactory->create();
-        parent::render($pdfResponse);
+        $this->pageResult->renderNonHttpResult($pdfResponse);
         return $pdfResponse;
     }
 
@@ -109,5 +101,4 @@ class PdfResult extends PageResult
         }
         $response->appendBody($body);
     }
-
 }

@@ -1,6 +1,7 @@
 <?php
 namespace Staempfli\Pdf\Test\Integration;
 
+use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\TestFramework\ObjectManager;
 use Staempfli\Pdf\Model\View\PdfResult;
@@ -26,7 +27,7 @@ class PdfResultTest extends \PHPUnit_Framework_TestCase
     {
         /** @var HttpResponse $response */
         $response = $this->objectManager->create(HttpResponse::class);
-        $this->pdfResult->addDefaultHandle();
+        $this->objectManager->get(Page::class)->addDefaultHandle();
         $this->pdfResult->setFilename('testpdf.pdf');
         $this->pdfResult->renderResult($response);
 

@@ -25,4 +25,16 @@ class PageResultWithoutHttp extends Page
         \Magento\Framework\Profiler::stop('LAYOUT');
         return $this;
     }
+
+    /**
+     * @todo replace $this->pageConfigRenderer with specialized renderer to replace http:// URLs with file:// URLs
+     * @todo for optimized rendering of local resources
+     * @todo (similar to \Magento\Developer\Model\View\Page\Config\ClientSideLessCompilation\Renderer)
+     */
+    protected function initPageConfigReader()
+    {
+        parent::initPageConfigReader();
+    }
+
+
 }

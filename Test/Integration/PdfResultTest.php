@@ -27,9 +27,27 @@ class PdfResultTest extends \PHPUnit_Framework_TestCase
         /** @var HttpResponse $response */
         $response = $this->objectManager->create(HttpResponse::class);
         $this->pdfResult->addDefaultHandle();
+        $this->pdfResult->setFilename('testpdf.pdf');
         $this->pdfResult->renderResult($response);
-        $this->assertNotFalse($response->getHeader('Content-type'), 'Content-type header should be present');
-        $this->assertEquals('application/pdf', $response->getHeader('Content-type')->getFieldValue());
+
+        $this->assertResponseHeader($response, 'Content-type', $this->equalTo('application/pdf'));
+        $this->assertResponseHeader($response, 'Content-length', $this->greaterThan(1000), 'Content-length header should be at least 1K');
+        $this->assertResponseHeader($response, 'Cache-Control', $this->equalTo('must-revalidate, post-check=0, pre-check=0'));
+        $this->assertResponseHeader($response, 'Last-Modified', $this->callback(function($lastModified) {
+            return \strtotime($lastModified) > \time() - 10;
+        }), 'Last-Modified header should be about right now');
+        $this->assertResponseHeader($response, 'Content-Disposition', $this->equalTo('attachment; filename="testpdf.pdf"'));
         $this->assertStringStartsWith('%PDF-', $response->getBody(), 'body should contain the PDF header');
+    }
+
+    /**
+     * @param HttpResponse $response
+     * @param string $field
+     * @param \PHPUnit_Framework_Constraint $constraint
+     */
+    private function assertResponseHeader(HttpResponse $response, $field, \PHPUnit_Framework_Constraint $constraint, $message = '')
+    {
+        $this->assertNotFalse($response->getHeader($field), "{$field} header should be present");
+        $this->assertThat($response->getHeader($field)->getFieldValue(), $constraint, $message);
     }
 }

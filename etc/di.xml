@@ -12,6 +12,7 @@
             </argument>
         </arguments>
     </type>
+    <type name="\Staempfli\Pdf\Service\PdfOptions" shared="false"/>
     <type name="\Staempfli\Pdf\Model\PdfFactory" shared="false"/>
     <type name="\Staempfli\Pdf\Adapter\WkPdfEngine" shared="false" />
     <type name="\mikehaertl\wkhtmlto\Pdf" shared="false" />

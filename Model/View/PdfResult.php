@@ -3,10 +3,9 @@ namespace Staempfli\Pdf\Model\View;
 
 use Magento\Framework;
 use Magento\Framework\App\ResponseInterface;
-use Magento\Framework\Controller\ResultInterface;
-use Magento\Framework\View;
-use Magento\Framework\View\Element\Template\Context as TemplateContext;
 use Magento\Framework\View\Result\Page as PageResult;
+use Staempfli\Pdf\Api\Options;
+use Staempfli\Pdf\Api\OptionsFactory;
 use Staempfli\Pdf\Model\PdfFactory;
 use Staempfli\Pdf\Model\PdfResponse;
 use Staempfli\Pdf\Model\PdfResponseFactory;
@@ -24,15 +23,22 @@ class PdfResult extends Framework\Controller\AbstractResult
     private $pdfResponseFactory;
     /** @var PdfFactory */
     private $pdfFactory;
-    /** @var string */
-    private $filename = null;
+    /** @var Options */
+    private $pdfGlobalOptions;
+    /** @var Options */
+    private $pdfPageOptions;
     /** @var PageResultWithoutHttp */
     private $pageResult;
+    /** @var string */
+    private $filename = null;
 
-    public function __construct(PdfResponseFactory $pdfResponseFactory, PdfFactory $pdfFactory, PageResultWithoutHttp $pageResult)
+    public function __construct(PdfResponseFactory $pdfResponseFactory, PdfFactory $pdfFactory,
+                                OptionsFactory $pdfOptionsFactory, PageResultWithoutHttp $pageResult)
     {
         $this->pdfResponseFactory = $pdfResponseFactory;
         $this->pdfFactory = $pdfFactory;
+        $this->pdfGlobalOptions = $pdfOptionsFactory->create();
+        $this->pdfPageOptions = $pdfOptionsFactory->create();
         $this->pageResult = $pageResult;
     }
 
@@ -45,6 +51,16 @@ class PdfResult extends Framework\Controller\AbstractResult
     public function setFilename($filename)
     {
         $this->filename = $filename;
+    }
+
+    public function addGlobalOptions(Options $options)
+    {
+        $this->pdfGlobalOptions = $this->pdfGlobalOptions->merge($options);
+    }
+
+    public function addPageOptions(Options $options)
+    {
+        $this->pdfPageOptions = $this->pdfPageOptions->merge($options);
     }
 
     /**
@@ -66,7 +82,17 @@ class PdfResult extends Framework\Controller\AbstractResult
     public function renderSourceDocument()
     {
         /** @var PdfResponse $pdfResponse */
-        $pdfResponse = $this->pdfResponseFactory->create();
+        $pdfResponse = $this->pdfResponseFactory->create([
+            PdfResponse::PARAM_OPTIONS => $this->pdfPageOptions
+        ]);
+        /*
+         * As of Magento 2.1, addDefaultHandle() must be called after instantiating a layout result,
+         * see \Magento\Framework\Controller\ResultFactory::create()
+         *
+         * But since it is marked as a temporary solution, this might change in a later Magento release
+         */
+        $this->pageResult->addDefaultHandle();
+
         $this->pageResult->renderNonHttpResult($pdfResponse);
         return $pdfResponse;
     }
@@ -77,9 +103,8 @@ class PdfResult extends Framework\Controller\AbstractResult
     protected function renderPdf()
     {
         $pdf = $this->pdfFactory->create();
-        // $pdf->addOptions($this->pdfGlobalOptions); //TODO implement setter or attribute for global options
+        $pdf->addOptions($this->pdfGlobalOptions);
         $pdfResponse = $this->renderSourceDocument();
-        //$pdfResponse->addOptions($this->pdfPageOptions); //TODO implement setter or attribute for page options
         $pdf->appendContent($pdfResponse);
         $body = $pdf->file()->toString();
         return $body;

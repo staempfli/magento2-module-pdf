@@ -14,13 +14,10 @@ final class PdfResponse implements ResponseInterface, SourceDocument
     /** @var  Options */
     private $pdfOptions;
 
-    /**
-     * PdfResponse constructor.
-     */
-    public function __construct(PdfOptionsFactory $optionsFactory)
+    const PARAM_OPTIONS = 'options';
+    public function __construct(Options $options)
     {
-        //TODO decide where and how to define page specific options. Probably need to expose an addOptions() method
-        $this->pdfOptions = $optionsFactory->create();
+        $this->pdfOptions = $options;
     }
 
     /**

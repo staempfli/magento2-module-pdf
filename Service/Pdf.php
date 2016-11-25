@@ -109,7 +109,7 @@ class Pdf
      */
     public function setHeaderHtml($html)
     {
-        $this->options[PdfOptions::KEY_HEADER_HTML_URL] = $html;
+        $this->options[PdfOptions::KEY_PAGE_HEADER_HTML_URL] = $html;
     }
 
     /**
@@ -135,7 +135,7 @@ class Pdf
      */
     public function setFooterHtml($html)
     {
-        $this->options[PdfOptions::KEY_FOOTER_HTML_URL] = $html;
+        $this->options[PdfOptions::KEY_PAGE_FOOTER_HTML_URL] = $html;
     }
 
     /**

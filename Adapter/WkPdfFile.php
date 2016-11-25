@@ -30,6 +30,7 @@ final class WkPdfFile implements PdfFile
 
     public function toString()
     {
+        //TODO if false, throw exception with $this->wkPdf->getError()
         return $this->wkPdf->toString();
     }
 

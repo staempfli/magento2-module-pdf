@@ -41,15 +41,15 @@ class PdfFactory
         return new PdfOptions(
             $withoutNull(
                 [
-                    PdfOptions::KEY_BINARY => $config(Config::XML_PATH_BINARY),
-                    PdfOptions::KEY_VERSION9 => $config(Config::XML_PATH_VERSION9),
-                    PdfOptions::KEY_TMP_DIR => $config(Config::XML_PATH_TMP_DIR),
-                    PdfOptions::KEY_CLI_OPTIONS => $withoutNull([
-                        PdfOptions::CLI_OPTIONS_KEY_ESCAPE_ARGS => $config(Config::XML_PATH_ESCAPE_ARGS),
-                        PdfOptions::CLI_OPTIONS_KEY_USE_EXEC => $config(Config::XML_PATH_USE_EXEC),
-                        PdfOptions::CLI_OPTIONS_KEY_XVFB_RUN_OPTIONS => $config(Config::XML_PATH_XVFB_RUN_OPTIONS),
-                        PdfOptions::CLI_OPTIONS_KEY_XVFB_RUN_BINARY => $config(Config::XML_PATH_XVFB_RUN_BINARY),
-                        PdfOptions::CLI_OPTIONS_KEY_USE_XVFB_RUN => $config(Config::XML_PATH_USE_XVFB_RUN),
+                    PdfOptions::KEY_GLOBAL_BINARY => $config(Config::XML_PATH_BINARY),
+                    PdfOptions::KEY_GLOBAL_VERSION9 => $config(Config::XML_PATH_VERSION9),
+                    PdfOptions::KEY_GLOBAL_TMP_DIR => $config(Config::XML_PATH_TMP_DIR),
+                    PdfOptions::KEY_GLOBAL_CLI_OPTIONS => $withoutNull([
+                        PdfOptions::KEY_CLI_OPTIONS_ESCAPE_ARGS => $config(Config::XML_PATH_ESCAPE_ARGS),
+                        PdfOptions::KEY_CLI_OPTIONS_USE_EXEC => $config(Config::XML_PATH_USE_EXEC),
+                        PdfOptions::KEY_CLI_OPTIONS_XVFB_RUN_OPTIONS => $config(Config::XML_PATH_XVFB_RUN_OPTIONS),
+                        PdfOptions::KEY_CLI_OPTIONS_XVFB_RUN_BINARY => $config(Config::XML_PATH_XVFB_RUN_BINARY),
+                        PdfOptions::KEY_CLI_OPTIONS_USE_XVFB_RUN => $config(Config::XML_PATH_USE_XVFB_RUN),
                     ])
                 ]
             )

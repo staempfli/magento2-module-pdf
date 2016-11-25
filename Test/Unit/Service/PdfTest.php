@@ -77,12 +77,12 @@ class PdfTest extends \PHPUnit_Framework_TestCase
     {
         $this->pdf->setHeaderHtml('Header HTML source');
         $this->pdf->file();
-        $this->assertEquals('Header HTML source', $this->fakePdfEngine->globalOptions[PdfOptions::KEY_HEADER_HTML_URL]);
+        $this->assertEquals('Header HTML source', $this->fakePdfEngine->globalOptions[PdfOptions::KEY_PAGE_HEADER_HTML_URL]);
     }
     public function testSetFooterHtml()
     {
         $this->pdf->setFooterHtml('Footer HTML source');
         $this->pdf->file();
-        $this->assertEquals('Footer HTML source', $this->fakePdfEngine->globalOptions[PdfOptions::KEY_FOOTER_HTML_URL]);
+        $this->assertEquals('Footer HTML source', $this->fakePdfEngine->globalOptions[PdfOptions::KEY_PAGE_FOOTER_HTML_URL]);
     }
 }

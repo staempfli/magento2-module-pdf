@@ -56,14 +56,14 @@ class WkPdfEngineTest extends \PHPUnit_Framework_TestCase
         $pdf = $this->pdfFactory->create();
         $pdf->addOptions(new PdfOptions(
             [
-                PdfOptions::KEY_TITLE => 'TEST PDF',
-                PdfOptions::KEY_HEADER_SPACING => '10',
-                PdfOptions::FLAG_HEADER_LINE,
-                PdfOptions::KEY_HEADER_TEXT_LEFT => 'HEADER',
-                PdfOptions::KEY_HEADER_TEXT_RIGHT => 'Page [page]',
-                PdfOptions::KEY_IGNORE_WARNINGS => true,
-                PdfOptions::KEY_FOOTER_TEXT_LEFT => 'Hello, I am a footer.',
-                PdfOptions::KEY_FOOTER_TEXT_RIGHT => 'I am text based.'
+                PdfOptions::KEY_GLOBAL_TITLE => 'TEST PDF',
+                PdfOptions::KEY_PAGE_HEADER_SPACING => '10',
+                PdfOptions::FLAG_PAGE_HEADER_LINE,
+                PdfOptions::KEY_PAGE_HEADER_TEXT_LEFT => 'HEADER',
+                PdfOptions::KEY_PAGE_HEADER_TEXT_RIGHT => 'Page [page]',
+                PdfOptions::KEY_GLOBAL_IGNORE_WARNINGS => true,
+                PdfOptions::KEY_PAGE_FOOTER_TEXT_LEFT => 'Hello, I am a footer.',
+                PdfOptions::KEY_PAGE_FOOTER_TEXT_RIGHT => 'I am text based.'
             ]
         ));
         $pdf->appendCover(new FakeSourceDocument('<body>BIG COVER</body>', new PdfOptions([])));

@@ -57,7 +57,7 @@ class PdfFactoryTest extends \PHPUnit_Framework_TestCase
                     [Config::XML_PATH_XVFB_RUN_OPTIONS, $default, null, null],
                 ],
                 'expected_options' => [
-                    PdfOptions::KEY_CLI_OPTIONS => [
+                    PdfOptions::KEY_GLOBAL_CLI_OPTIONS => [
                     ]
                 ]
             ],
@@ -73,15 +73,15 @@ class PdfFactoryTest extends \PHPUnit_Framework_TestCase
                     [Config::XML_PATH_XVFB_RUN_OPTIONS, $default, null, '--server-args="-screen 0, 1024x768x24"'],
                 ],
                 'expected_options' => [
-                    PdfOptions::KEY_BINARY => '/usr/bin/wkpdf2html',
-                    PdfOptions::KEY_VERSION9 => true,
-                    PdfOptions::KEY_TMP_DIR => '/tmp/wkpdf',
-                    PdfOptions::KEY_CLI_OPTIONS => [
-                        PdfOptions::CLI_OPTIONS_KEY_ESCAPE_ARGS => true,
-                        PdfOptions::CLI_OPTIONS_KEY_USE_EXEC => true,
-                        PdfOptions::CLI_OPTIONS_KEY_USE_XVFB_RUN => true,
-                        PdfOptions::CLI_OPTIONS_KEY_XVFB_RUN_BINARY => 'xvfb-run',
-                        PdfOptions::CLI_OPTIONS_KEY_XVFB_RUN_OPTIONS => '--server-args="-screen 0, 1024x768x24"',
+                    PdfOptions::KEY_GLOBAL_BINARY => '/usr/bin/wkpdf2html',
+                    PdfOptions::KEY_GLOBAL_VERSION9 => true,
+                    PdfOptions::KEY_GLOBAL_TMP_DIR => '/tmp/wkpdf',
+                    PdfOptions::KEY_GLOBAL_CLI_OPTIONS => [
+                        PdfOptions::KEY_CLI_OPTIONS_ESCAPE_ARGS => true,
+                        PdfOptions::KEY_CLI_OPTIONS_USE_EXEC => true,
+                        PdfOptions::KEY_CLI_OPTIONS_USE_XVFB_RUN => true,
+                        PdfOptions::KEY_CLI_OPTIONS_XVFB_RUN_BINARY => 'xvfb-run',
+                        PdfOptions::KEY_CLI_OPTIONS_XVFB_RUN_OPTIONS => '--server-args="-screen 0, 1024x768x24"',
                     ]
                 ]
             ]

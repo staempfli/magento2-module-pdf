@@ -46,25 +46,25 @@ class PdfResultTest extends \PHPUnit_Framework_TestCase
 
         $pdfResult->addGlobalOptions(new PdfOptions(
             [
-                PdfOptions::KEY_ORIENTATION => PdfOptions::ORIENTATION_LANDSCAPE,
+                PdfOptions::KEY_GLOBAL_ORIENTATION => PdfOptions::ORIENTATION_LANDSCAPE,
             ]
         ));
         $pdfResult->addPageOptions(new PdfOptions(
             [
-                PdfOptions::KEY_COOKIES => ['frontend' => '0123456789abcdef0123456789abcdef'],
+                PdfOptions::KEY_PAGE_COOKIES => ['frontend' => '0123456789abcdef0123456789abcdef'],
             ]
         ));
         $pdfResult->renderResult($this->getMockBuilder(Http::class)->disableOriginalConstructor()->getMock());
 
         $this->assertEquals(new PdfOptions(
             [
-                PdfOptions::KEY_CLI_OPTIONS => [],
-                PdfOptions::KEY_ORIENTATION => PdfOptions::ORIENTATION_LANDSCAPE,
+                PdfOptions::KEY_GLOBAL_CLI_OPTIONS => [],
+                PdfOptions::KEY_GLOBAL_ORIENTATION => PdfOptions::ORIENTATION_LANDSCAPE,
             ]
         ), $this->fakePdfEngine->globalOptions);
         $this->assertEquals(new PdfOptions(
             [
-                PdfOptions::KEY_COOKIES => ['frontend' => '0123456789abcdef0123456789abcdef'],
+                PdfOptions::KEY_PAGE_COOKIES => ['frontend' => '0123456789abcdef0123456789abcdef'],
             ]
         ), $this->fakePdfEngine->pages[0][1]);
     }

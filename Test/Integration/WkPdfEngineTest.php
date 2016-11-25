@@ -2,6 +2,7 @@
 namespace Staempfli\Pdf\Test\Integration;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\TestFramework\ObjectManager;
+use Staempfli\Pdf\Adapter\WkPdfException;
 use Staempfli\Pdf\Model\Config;
 use Staempfli\Pdf\Model\PdfFactory;
 use Staempfli\Pdf\Service\FakeSourceDocument;
@@ -38,6 +39,24 @@ class WkPdfEngineTest extends \PHPUnit_Framework_TestCase
         $pdf->appendTableOfContents(new PdfOptions([]));
         $pdf->appendContent(new FakeSourceDocument('<body>print me!</body>', new PdfOptions([])));
         $this->assertStringStartsWith('%PDF-', $pdf->file()->toString(), 'binary string should contain the PDF header');
+    }
+
+    public function testExceptionOnToString()
+    {
+        $this->setExpectedException(WkPdfException::class);
+        $this->createInvalidPdf()->file()->toString();
+    }
+
+    public function testExceptionOnSend()
+    {
+        $this->setExpectedException(WkPdfException::class);
+        $this->createInvalidPdf()->file()->send();
+    }
+
+    public function testExceptionOnSave()
+    {
+        $this->setExpectedException(WkPdfException::class);
+        $this->createInvalidPdf()->file()->saveAs(\tempnam(\sys_get_temp_dir(), 'pdftest'));
     }
 
     /**
@@ -105,5 +124,21 @@ HTML;
             return 'wkhtmltopdf';
         }
         return $wkhtmltopdfBinary;
+    }
+
+    /**
+     * @return \Staempfli\Pdf\Service\Pdf
+     */
+    private function createInvalidPdf()
+    {
+        $pdf = $this->pdfFactory->create();
+        $pdf->setOptions(
+            new PdfOptions(
+                [
+                    'gibberish' => 'pffflllltt',
+                ]
+            )
+        );
+        return $pdf;
     }
 }

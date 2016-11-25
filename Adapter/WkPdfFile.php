@@ -20,18 +20,25 @@ final class WkPdfFile implements PdfFile
 
     public function saveAs($path)
     {
-        return $this->wkPdf->saveAs($path);
+        if (false === $this->wkPdf->saveAs($path)) {
+            throw new WkPdfException($this->wkPdf->getError());
+        }
     }
 
     public function send()
     {
-        return $this->wkPdf->send();
+        if (false === $this->wkPdf->send()) {
+            throw new WkPdfException($this->wkPdf->getError());
+        }
     }
 
     public function toString()
     {
-        //TODO if false, throw exception with $this->wkPdf->getError()
-        return $this->wkPdf->toString();
+        $result = $this->wkPdf->toString();
+        if ($result === false) {
+            throw new WkPdfException($this->wkPdf->getError());
+        }
+        return $result;
     }
 
 }

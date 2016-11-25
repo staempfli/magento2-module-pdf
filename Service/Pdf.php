@@ -85,59 +85,6 @@ class Pdf
     {
         $source->printTo(new PdfCover($this->engine));
     }
-
-    /**
-     * In header and footer text string supplied
-     * to e.g. --header-left, the following variables will be substituted.
-     *
-     * [page]       Replaced by the number of the pages currently being printed
-     * [frompage]   Replaced by the number of the first page to be printed
-     * [topage]     Replaced by the number of the last page to be printed
-     * [webpage]    Replaced by the URL of the page being printed
-     * [section]    Replaced by the name of the current section
-     * [subsection] Replaced by the name of the current subsection
-     * [date]       Replaced by the current date in system local format
-     * [isodate]    Replaced by the current date in ISO 8601 extended format
-     * [time]       Replaced by the current time in system local format
-     * [title]      Replaced by the title of the of the current page object
-     * [doctitle]   Replaced by the title of the output document
-     * [sitepage]   Replaced by the number of the page in the current site being converted
-     * [sitepages]  Replaced by the number of pages in the current site being converted
-     *
-     * @see http://wkhtmltopdf.org/usage/wkhtmltopdf.txt
-     * @param $html
-     */
-    public function setHeaderHtml($html)
-    {
-        $this->options[PdfOptions::KEY_PAGE_HEADER_HTML_URL] = $html;
-    }
-
-    /**
-     * In header and footer text string supplied
-     * to e.g. --header-left, the following variables will be substituted.
-     *
-     * [page]       Replaced by the number of the pages currently being printed
-     * [frompage]   Replaced by the number of the first page to be printed
-     * [topage]     Replaced by the number of the last page to be printed
-     * [webpage]    Replaced by the URL of the page being printed
-     * [section]    Replaced by the name of the current section
-     * [subsection] Replaced by the name of the current subsection
-     * [date]       Replaced by the current date in system local format
-     * [isodate]    Replaced by the current date in ISO 8601 extended format
-     * [time]       Replaced by the current time in system local format
-     * [title]      Replaced by the title of the of the current page object
-     * [doctitle]   Replaced by the title of the output document
-     * [sitepage]   Replaced by the number of the page in the current site being converted
-     * [sitepages]  Replaced by the number of pages in the current site being converted
-     *
-     * @see http://wkhtmltopdf.org/usage/wkhtmltopdf.txt
-     * @param $html
-     */
-    public function setFooterHtml($html)
-    {
-        $this->options[PdfOptions::KEY_PAGE_FOOTER_HTML_URL] = $html;
-    }
-
     /**
      * @return PdfFile
      */

@@ -62,7 +62,7 @@ class Pdf
     }
 
     /**
-     * A page objects puts the content of a singe webpage into the output document.
+     * A page object puts the content of a singe webpage into the output document.
      *
      * @see http://wkhtmltopdf.org/usage/wkhtmltopdf.txt
      * @param SourceDocument $source
@@ -73,8 +73,7 @@ class Pdf
     }
 
     /**
-    /**
-     * A cover objects puts the content of a singe webpage into the output document,
+     * A cover object puts the content of a singe webpage into the output document,
      * the page does not appear in the table of content, and does not have headers
      * and footers.
      *

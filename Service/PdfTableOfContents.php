@@ -5,6 +5,9 @@ use Staempfli\Pdf\Api\Options;
 use Staempfli\Pdf\Api\PdfEngine;
 use Staempfli\Pdf\Api\TableOfContents;
 
+/**
+ * Table of contents that appends itself to PDF
+ */
 final class PdfTableOfContents implements TableOfContents
 {
     /**

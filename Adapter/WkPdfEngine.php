@@ -9,7 +9,6 @@ use Staempfli\Pdf\Api\PdfFile;
 
 /**
  * This is the adapter to the actual PDF generating library.
- * Always use mock/fake in unit tests, only integration test for this
  */
 final class WkPdfEngine implements PdfEngine
 {

@@ -1,6 +1,9 @@
 <?php
 namespace Staempfli\Pdf\Api;
 
+/**
+ * Result of underlying PDF engine. Implemented by adapter
+ */
 interface PdfFile
 {
     /**

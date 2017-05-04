@@ -10,6 +10,9 @@ use Staempfli\Pdf\Service\PdfOptions;
 use Staempfli\Pdf\Service\PdfTableOfContents;
 use Staempfli\Pdf\Api\SourceDocument;
 
+/**
+ * PDF service. Entry point for clients.
+ */
 class Pdf
 {
     /** @var PdfEngine */

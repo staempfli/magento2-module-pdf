@@ -1,6 +1,9 @@
 <?php
 namespace Staempfli\Pdf\Api;
 
+/**
+ * Underlying PDF engine, implemented by adapter
+ */
 interface PdfEngine
 {
     /**
@@ -15,7 +18,7 @@ interface PdfEngine
     /**
      * Append HTML content as cover page
      *
-     * @param $html
+     * @param string $html
      * @param Options $options
      * @return void
      */

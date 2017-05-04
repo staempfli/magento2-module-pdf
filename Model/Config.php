@@ -1,7 +1,9 @@
 <?php
 namespace Staempfli\Pdf\Model;
 
-
+/**
+ * Configuration constants, in class for autoloading
+ */
 class Config
 {
     const XML_PATH_BINARY = 'staempfli_pdf/system/binary';

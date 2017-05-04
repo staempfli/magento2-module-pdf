@@ -6,6 +6,9 @@ use Staempfli\Pdf\Api\PdfEngine;
 use Staempfli\Pdf\Service\Pdf;
 use Staempfli\Pdf\Service\PdfOptions;
 
+/**
+ * Factory for PDF service, with options from Magento configuration
+ */
 class PdfFactory
 {
     /**

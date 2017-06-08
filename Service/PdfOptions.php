@@ -127,7 +127,6 @@ final class PdfOptions extends ArrayObject implements Options
      */
     const FLAG_GLOBAL_NO_PDF_COMPRESSION = 'no-pdf-compression';
 
-
     // page options
     /**
      * HTML header, should be URL or filename
@@ -238,7 +237,8 @@ final class PdfOptions extends ArrayObject implements Options
      */
     const FLAG_PAGE_ENABLE_LOCAL_FILE_ACCESS = 'enable-local-file-access';
     /**
-     * Do not allow conversion of a local file to read in other local files, unless explicitly allowed with FLAG_PAGE_ALLOW
+     * Do not allow conversion of a local file to read in other local files,
+     * unless explicitly allowed with FLAG_PAGE_ALLOW
      */
     const FLAG_PAGE_DISABLE_LOCAL_FILE_ACCESS = 'disable-local-file-access';
     /**
@@ -473,13 +473,12 @@ final class PdfOptions extends ArrayObject implements Options
      *
      * @param array $input
      * @param int $flags
-     * @param string $iterator_class
+     * @param string $iteratorClass
      */
-    public function __construct($input = [], $flags = 0, $iterator_class = \ArrayIterator::class)
+    public function __construct($input = [], $flags = 0, $iteratorClass = \ArrayIterator::class)
     {
-        parent::__construct($input, $flags, $iterator_class);
+        parent::__construct($input, $flags, $iteratorClass);
     }
-
 
     /**
      * @param Options $newOptions

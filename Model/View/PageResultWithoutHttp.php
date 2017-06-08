@@ -36,5 +36,4 @@ class PageResultWithoutHttp extends Page
         parent::initPageConfigReader();
     }
 
-
 }

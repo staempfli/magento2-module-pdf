@@ -86,14 +86,14 @@ This module can generate a PDF from any `frontControllerAction`
 	```
 
 Troubleshooting
-------------------------
+---------------
 
-#### The switch `--print-media-type`, is not support using unpatched qt:
+##### The switch `--print-media-type`, is not support using unpatched qt:
 
 * `wkhtmltopdf` should not be installed via apt-get. See:
     * http://stackoverflow.com/questions/18758589/wkhtmltopdf-installation-error-on-ubuntu
 
-#### Tiny or very small output on Mac:
+##### Tiny or very small output on Mac:
 
 * It seems to be a bug on `wkhtmltopdf` version 0.12.4. It can be fixed by installing 0.12.3
     * https://stackoverflow.com/questions/40814680/wkhtmltopdf-generates-tiny-output-on-mac

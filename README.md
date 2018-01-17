@@ -1,16 +1,14 @@
-Magento 2 PDF generator
-=======================
+# Magento 2 PDF generator
 
 Magento 2 module to ease the pdf generation using [wkhtmltopdf](https://wkhtmltopdf.org/) features
 
-Installation
-------------
+## Installation
+
 ```
 composer require "staempfli/magento2-module-pdf":"~1.0"
 ```
 
-Setup
------
+## Setup
 
 ### Install wkhtmltopdf
 This module needs [wkhtmltopdf](https://wkhtmltopdf.org/) installed on your computer. You can download and install it from here:
@@ -26,8 +24,7 @@ NOTE: Do not install it using `apt-get` on Linux systems. See [troubleshooting](
 ![Admin Configuration](docs/img/config.png)
 
 
-Usage
------
+## Usage
 
 This module can generate a PDF from any `frontControllerAction`
 
@@ -85,40 +82,33 @@ This module can generate a PDF from any `frontControllerAction`
 	}
 	```
 
-Troubleshooting
----------------
+## Troubleshooting
 
-#### The switch print-media, is not support using unpatched qt:
+### The switch print-media, is not support using unpatched qt:
 
 * `wkhtmltopdf` should not be installed via apt-get. See:
     * http://stackoverflow.com/questions/18758589/wkhtmltopdf-installation-error-on-ubuntu
 
-#### Tiny or very small output on Mac:
+### Tiny or very small output on Mac:
 
 * It seems to be a bug on `wkhtmltopdf` version 0.12.4. It can be fixed by installing 0.12.3
     * https://stackoverflow.com/questions/40814680/wkhtmltopdf-generates-tiny-output-on-mac
 
-Requirements
-------------
+## Requirements
 - PHP >= 7.0.*
 - Magento >= 2.1.*
 
-Support
--------
+## Support
 If you have any issues with this extension, open an issue on [GitHub](https://github.com/staempfli/magento2-module-pdf/issues).
 
-Contribution
-------------
+## Contribution
 Any contribution is highly appreciated. The best way to contribute code is to open a [pull request on GitHub](https://help.github.com/articles/using-pull-requests).
 
-Developer
----------
+## Developer
 Staempfli Webteam, [Fabian Schmengler,  integer_net](https://github.com/schmengler) and all other [contributors](https://github.com/staempfli/magento2-module-pdf/contributors)
 
-License
--------
+## License
 [Open Software License ("OSL") v. 3.0](https://opensource.org/licenses/OSL-3.0)
 
-Copyright
----------
+## Copyright
 (c) 2018, Stämpfli AG

@@ -15,7 +15,7 @@ This module needs [wkhtmltopdf](https://wkhtmltopdf.org/) installed on your comp
 
 * [https://wkhtmltopdf.org/downloads.html](https://wkhtmltopdf.org/downloads.html)
 
-NOTE: Do not install it using `apt-get` on Linux systems. See [troubleshooting](#Troubleshooting) section for more info.
+NOTE: Do not install it using `apt-get` on Linux systems. See [troubleshooting](#troubleshooting) section for more info.
 
 ### Module configuration
 

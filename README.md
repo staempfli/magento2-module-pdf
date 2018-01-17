@@ -84,7 +84,7 @@ This module can generate a PDF from any `frontControllerAction`
 
 ## Troubleshooting
 
-### The switch print-media, is not support using unpatched qt:
+### The switch --print-media, is not support using unpatched qt:
 
 * `wkhtmltopdf` should not be installed via apt-get. See:
     * http://stackoverflow.com/questions/18758589/wkhtmltopdf-installation-error-on-ubuntu

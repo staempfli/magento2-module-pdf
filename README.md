@@ -17,7 +17,7 @@ This module needs [wkhtmltopdf](https://wkhtmltopdf.org/) installed on your comp
 
 * [https://wkhtmltopdf.org/downloads.html](https://wkhtmltopdf.org/downloads.html)
 
-NOTE: Do not install it using `apt-get` on Linux systems. See [troubleshooting](#the-switch---print-media-type,-is-not-support-using-unpatched-qt) section for more info.
+NOTE: Do not install it using `apt-get` on Linux systems. See [troubleshooting](#Troubleshooting) section for more info.
 
 ### Module configuration
 
@@ -88,7 +88,7 @@ This module can generate a PDF from any `frontControllerAction`
 Troubleshooting
 ------------------------
 
-#### The switch --print-media-type, is not support using unpatched qt:
+#### The switch `--print-media-type`, is not support using unpatched qt:
 
 * `wkhtmltopdf` should not be installed via apt-get. See:
     * http://stackoverflow.com/questions/18758589/wkhtmltopdf-installation-error-on-ubuntu

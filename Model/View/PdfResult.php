@@ -33,8 +33,9 @@ class PdfResult extends Framework\Controller\AbstractResult
     private $filename = null;
 
     public function __construct(PdfResponseFactory $pdfResponseFactory, PdfFactory $pdfFactory,
-                                OptionsFactory $pdfOptionsFactory, PageResultWithoutHttp $pageResult)
-    {
+        OptionsFactory $pdfOptionsFactory, PageResultWithoutHttp $pageResult
+    ) {
+    
         $this->pdfResponseFactory = $pdfResponseFactory;
         $this->pdfFactory = $pdfFactory;
         $this->pdfGlobalOptions = $pdfOptionsFactory->create();

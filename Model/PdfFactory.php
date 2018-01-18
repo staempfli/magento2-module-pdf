@@ -35,11 +35,13 @@ class PdfFactory
 
     private function optionsFromConfig()
     {
-        $config = function($xpath) {
+        $config = function ($xpath) {
             return $this->scopeConfig->getValue($xpath);
         };
-        $withoutNull = function(array $array) {
-            return array_filter($array, function($value) { return ! is_null($value); });
+        $withoutNull = function (array $array) {
+            return array_filter($array, function ($value) {
+                return ! is_null($value); //@codingStandardsIgnoreLine;
+            });
         };
         return new PdfOptions(
             $withoutNull(

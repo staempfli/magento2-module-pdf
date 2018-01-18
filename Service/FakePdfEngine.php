@@ -49,7 +49,6 @@ class FakePdfEngine implements PdfEngine
         $this->tableOfContents = $options;
     }
 
-
     /**
      * @param Options $globalOptions
      * @param Medium $cover

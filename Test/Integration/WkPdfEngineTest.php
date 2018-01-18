@@ -105,6 +105,7 @@ HTML;
     /**
      * @param $command
      * @return bool
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable) // https://phpmd.org/rules/index.html
      */
     private function isExecutable($command)
     {

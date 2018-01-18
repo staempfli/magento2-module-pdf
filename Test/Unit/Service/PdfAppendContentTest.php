@@ -25,10 +25,10 @@ class PdfAppendContentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             [[$html, $options]], $this->pdfEngine->pages);
 
-        $html2 = '<h1>more html</h1>';
-        $options2 = new PdfOptions(['version' => 'html11']);
-        $this->medium->printHtml($html2, $options2);
+        $additionalHtml = '<h1>more html</h1>';
+        $additionalOptions = new PdfOptions(['version' => 'html11']);
+        $this->medium->printHtml($additionalHtml, $additionalOptions);
         $this->assertEquals(
-            [[$html, $options], [$html2, $options2]], $this->pdfEngine->pages);
+            [[$html, $options], [$additionalHtml, $additionalOptions]], $this->pdfEngine->pages);
     }
 }

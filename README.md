@@ -82,6 +82,95 @@ This module can generate a PDF from any `frontControllerAction`
 	}
 	```
 
+### Header and Footer
+
+Header and footer html can be added as follows:
+
+1. Create your `header.html` and `footer.html` files inside your Module template dir
+
+	```
+	<!doctype html>
+	<!-- app/code/Vendor/Package/view/frontend/templates/pdf/header.html -->
+	<html>
+   		<body>
+			Header text
+	    	</body>
+	</html>
+	```
+	```
+	<!doctype html>
+	<!-- app/code/Vendor/Package/view/frontend/templates/pdf/footer.html -->
+	<html>
+    		<body>
+			Footer text
+    		</body>
+	</html>
+	```
+
+2. Attach those files to the Controller pdf generation
+
+	```
+	<?php
+	namespace Vendor\Package\Controller\Actions;
+
+	use Magento\Framework\App\Action\Action;
+	use Magento\Framework\View\Element\Template\File\Resolver as TemplateResolver;
+	use Staempfli\Pdf\Model\View\PdfResult;
+	use Staempfli\Pdf\Service\PdfOptions;
+
+	class GeneratePdf extends Action
+	{
+	    /**
+     	     * @var TemplateResolver
+    	     */
+    	    private $templateResolver;
+
+    	    public function __construct(
+        	TemplateResolver $templateResolver,
+        	Context $context
+    	    ) {
+       	        parent::__construct($context);
+ 		$this->templateResolver = $templateResolver;
+    	    }
+
+            public function execute()
+    	    {
+                return $this->renderPdfResult();
+    	    }
+
+    	    protected function renderPdfResult()
+    	    {
+        	/** @var PdfResult $result */
+        	$result = $this->resultFactory->create(PdfResult::TYPE);
+        	$result->addGlobalOptions(
+          	  new PdfOptions(
+             	   [
+             	       PdfOptions::KEY_GLOBAL_TITLE => __('Return PDF'),
+             	       PdfOptions::KEY_PAGE_ENCODING => PdfOptions::ENCODING_UTF_8,
+             	       PdfOptions::KEY_GLOBAL_ORIENTATION => PdfOptions::ORIENTATION_PORTRAIT,
+             	       PdfOptions::FLAG_PAGE_PRINT_MEDIA_TYPE,
+             	       PdfOptions::KEY_PAGE_HEADER_SPACING => "10",
+             	   ]
+            	)
+        	);
+        	$result->addPageOptions(
+          	  new PdfOptions(
+             	   [
+             	       PdfOptions::KEY_PAGE_COOKIES => ${'_COOKIE'},
+             	       PdfOptions::KEY_PAGE_HEADER_HTML_URL => $this->templateResolver
+                        ->getTemplateFileName('Vendor_Package::pdf/header.html'),
+                    PdfOptions::KEY_PAGE_FOOTER_HTML_URL => $this->templateResolver
+                        ->getTemplateFileName('Vendor_ Package::pdf/footer.html'),
+             	   ]
+            	)
+        	);
+        	return $result;
+    	    }
+	}
+	```
+
+**NOTE:** Only the header or only the footer as `html` is not possible, either both or none. Otherwise top and bottom margins are ignored.
+
 ## Troubleshooting
 
 ### The switch --print-media, is not support using unpatched qt:

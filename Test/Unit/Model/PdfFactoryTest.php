@@ -1,12 +1,14 @@
 <?php
-
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Test\Unit\Model;
 
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Staempfli\Pdf\Model\Config;
 use Staempfli\Pdf\Model\PdfFactory;
-use Staempfli\Pdf\Service\FakePdfEngine;
+use StaempfliPdf\Test\Service\FakePdfEngine;
 use Staempfli\Pdf\Service\PdfOptions;
 
 

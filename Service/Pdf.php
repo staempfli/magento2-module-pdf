@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Service;
 
 use Staempfli\Pdf\Api\Options;

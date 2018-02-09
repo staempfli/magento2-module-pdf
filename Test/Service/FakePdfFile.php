@@ -1,6 +1,8 @@
 <?php
-
-namespace Staempfli\Pdf\Service;
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
+namespace Staempfli\Pdf\Test\Service;
 
 use Staempfli\Pdf\Api\PdfFile;
 
@@ -9,11 +11,19 @@ use Staempfli\Pdf\Api\PdfFile;
  */
 final class FakePdfFile implements PdfFile
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     public $contents;
-    /** @var bool */
+
+    /**
+     * @var bool
+     */
     public $isGenerated = false;
-    /** @var bool */
+
+    /**
+     * @var bool
+     */
     private $isSent = false;
 
     /**
@@ -24,16 +34,25 @@ final class FakePdfFile implements PdfFile
         $this->contents = $contents;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function saveAs($path)
     {
         \file_put_contents($path, $this->contents);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function send()
     {
         $this->isSent = true;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function toString()
     {
         return $this->contents;

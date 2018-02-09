@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Test\Unit\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -10,7 +12,7 @@ use Staempfli\Pdf\Model\PdfResponse;
 use Staempfli\Pdf\Model\PdfResponseFactory;
 use Staempfli\Pdf\Model\View\PageResultWithoutHttp;
 use Staempfli\Pdf\Model\View\PdfResult;
-use Staempfli\Pdf\Service\FakePdfEngine;
+use StaempfliPdf\Test\Service\FakePdfEngine;
 use Staempfli\Pdf\Service\PdfOptions;
 
 

@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Test\Integration;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -7,7 +9,7 @@ use Magento\TestFramework\ObjectManager;
 use Staempfli\Pdf\Adapter\WkPdfException;
 use Staempfli\Pdf\Model\Config;
 use Staempfli\Pdf\Model\PdfFactory;
-use Staempfli\Pdf\Service\FakeSourceDocument;
+use Staempfli\Pdf\Test\Service\FakeSourceDocument;
 use Staempfli\Pdf\Service\PdfOptions;
 
 class WkPdfEngineTest extends \PHPUnit_Framework_TestCase

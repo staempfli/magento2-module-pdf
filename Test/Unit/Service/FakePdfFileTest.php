@@ -1,14 +1,18 @@
 <?php
-
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Test\Unit\Service;
 
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamFile;
-use Staempfli\Pdf\Service\FakePdfFile;
+use Staempfli\Pdf\Test\Service\FakePdfFile;
 
 class FakePdfFileTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var FakePdfFile */
+    /**
+     * @var \Staempfli\Pdf\Test\Service\FakePdfFile
+     */
     private $fakePdfFile;
 
     public function testSend()

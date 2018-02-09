@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Test\Integration;
 
 use Magento\Backend\Model\View\Result\Page;

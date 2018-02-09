@@ -1,6 +1,8 @@
 <?php
-
-namespace Staempfli\Pdf\Service;
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
+namespace Staempfli\Pdf\Test\Service;
 
 use Staempfli\Pdf\Api\Medium;
 use Staempfli\Pdf\Api\Options;
@@ -11,14 +13,19 @@ use Staempfli\Pdf\Api\SourceDocument;
  */
 final class FakeSourceDocument implements SourceDocument
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     private $html;
-    /** @var array */
+
+    /**
+     * @var \Staempfli\Pdf\Api\Options
+     */
     private $options;
 
     /**
      * @param string $html
-     * @param Options $options
+     * @param \Staempfli\Pdf\Api\Options $options
      */
     public function __construct($html, Options $options)
     {
@@ -27,12 +34,10 @@ final class FakeSourceDocument implements SourceDocument
     }
 
     /**
-     * @param Medium $medium
-     * @return void
+     * {@inheritdoc}
      */
     public function printTo(Medium $medium)
     {
         $medium->printHtml($this->html, $this->options);
     }
-
 }

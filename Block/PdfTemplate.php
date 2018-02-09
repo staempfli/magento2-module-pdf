@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Block;
 
 use Magento\Framework\View\Element\Template;

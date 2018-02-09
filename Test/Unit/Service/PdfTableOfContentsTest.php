@@ -1,8 +1,10 @@
 <?php
-
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Test\Unit\Service;
 
-use Staempfli\Pdf\Service\FakePdfEngine;
+use StaempfliPdf\Test\Service\FakePdfEngine;
 use Staempfli\Pdf\Service\PdfOptions;
 use Staempfli\Pdf\Service\PdfTableOfContents;
 
@@ -21,7 +23,7 @@ class PdfTableOfContentsTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->pdfEngine = new \Staempfli\Pdf\Service\FakePdfEngine();
+        $this->pdfEngine = new \StaempfliPdf\Test\Service\FakePdfEngine();
         $this->tableOfContents = new PdfTableOfContents($this->pdfEngine);
     }
 }

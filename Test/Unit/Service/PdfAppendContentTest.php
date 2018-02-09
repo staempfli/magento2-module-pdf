@@ -1,9 +1,10 @@
 <?php
+
 namespace Staempfli\Pdf\Test\Unit\Service;
 
 use Staempfli\Pdf\Service\FakePdfEngine;
-use Staempfli\Pdf\Service\PdfOptions;
 use Staempfli\Pdf\Service\PdfAppendContent;
+use Staempfli\Pdf\Service\PdfOptions;
 
 class PdfAppendContentTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,11 +13,6 @@ class PdfAppendContentTest extends \PHPUnit_Framework_TestCase
     /** @var PdfAppendContent */
     private $medium;
 
-    protected function setUp()
-    {
-        $this->pdfEngine = new FakePdfEngine();
-        $this->medium = new PdfAppendContent($this->pdfEngine);
-    }
     public function testPrintHtml()
     {
         $html = '<h1>html</h1>';
@@ -30,5 +26,11 @@ class PdfAppendContentTest extends \PHPUnit_Framework_TestCase
         $this->medium->printHtml($additionalHtml, $additionalOptions);
         $this->assertEquals(
             [[$html, $options], [$additionalHtml, $additionalOptions]], $this->pdfEngine->pages);
+    }
+
+    protected function setUp()
+    {
+        $this->pdfEngine = new FakePdfEngine();
+        $this->medium = new PdfAppendContent($this->pdfEngine);
     }
 }

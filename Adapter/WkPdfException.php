@@ -1,4 +1,5 @@
 <?php
+
 namespace Staempfli\Pdf\Adapter;
 
 /**

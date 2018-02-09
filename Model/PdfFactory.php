@@ -1,4 +1,5 @@
 <?php
+
 namespace Staempfli\Pdf\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -12,27 +13,41 @@ use Staempfli\Pdf\Service\PdfOptions;
 class PdfFactory
 {
     /**
-     * @var PdfEngine
+     * @var \Staempfli\Pdf\Api\PdfEngine
      */
     protected $pdfEngine;
+
     /**
-     * @var ScopeConfigInterface
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
     private $scopeConfig;
 
-    public function __construct(PdfEngine $pdfEngine, ScopeConfigInterface $scopeConfig)
-    {
+    /**
+     * @param \Staempfli\Pdf\Api\PdfEngine $pdfEngine
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+     */
+    public function __construct(
+        PdfEngine $pdfEngine,
+        ScopeConfigInterface $scopeConfig
+    ) {
         $this->pdfEngine = $pdfEngine;
         $this->scopeConfig = $scopeConfig;
     }
 
+    /**
+     * @return \Staempfli\Pdf\Service\Pdf
+     */
     public function create()
     {
         $pdf = new Pdf($this->pdfEngine);
         $pdf->setOptions($this->optionsFromConfig());
+
         return $pdf;
     }
 
+    /**
+     * @return \Staempfli\Pdf\Service\PdfOptions
+     */
     private function optionsFromConfig()
     {
         $config = function ($xpath) {
@@ -40,9 +55,10 @@ class PdfFactory
         };
         $withoutNull = function (array $array) {
             return array_filter($array, function ($value) {
-                return ! is_null($value); //@codingStandardsIgnoreLine;
+                return !is_null($value); //@codingStandardsIgnoreLine;
             });
         };
+
         return new PdfOptions(
             $withoutNull(
                 [
@@ -55,7 +71,7 @@ class PdfFactory
                         PdfOptions::KEY_CLI_OPTIONS_XVFB_RUN_OPTIONS => $config(Config::XML_PATH_XVFB_RUN_OPTIONS),
                         PdfOptions::KEY_CLI_OPTIONS_XVFB_RUN_BINARY => $config(Config::XML_PATH_XVFB_RUN_BINARY),
                         PdfOptions::KEY_CLI_OPTIONS_USE_XVFB_RUN => $config(Config::XML_PATH_USE_XVFB_RUN),
-                    ])
+                    ]),
                 ]
             )
         );

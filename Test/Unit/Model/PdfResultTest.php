@@ -1,9 +1,9 @@
 <?php
+
 namespace Staempfli\Pdf\Test\Unit\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Response\Http;
-use Staempfli\Pdf\Api\Options;
 use Staempfli\Pdf\Api\OptionsFactory;
 use Staempfli\Pdf\Model\PdfFactory;
 use Staempfli\Pdf\Model\PdfResponse;
@@ -22,12 +22,6 @@ class PdfResultTest extends \PHPUnit_Framework_TestCase
     /** @var ScopeConfigInterface|\PHPUnit_Framework_MockObject_MockObject */
     private $stubConfig;
 
-    protected function setUp()
-    {
-        $this->fakePdfEngine = new FakePdfEngine();
-        $this->stubConfig = $this->getMockBuilder(ScopeConfigInterface::class)->getMockForAbstractClass();
-    }
-
     public function testRenderWithOptions()
     {
         $pageResultMock = $this->getMockBuilder(PageResultWithoutHttp::class)->disableOriginalConstructor()->getMock();
@@ -35,8 +29,13 @@ class PdfResultTest extends \PHPUnit_Framework_TestCase
             ->method('renderNonHttpResult')
             ->with($this->isInstanceOf(PdfResponse::class))
             ->willReturnSelf();
-        $optionsFactoryMock = $this->getMockBuilder(OptionsFactory::class)->disableOriginalConstructor()->setMethods(['create'])->getMock();
-        $optionsFactoryMock->method('create')->willReturnCallback(function() { return new PdfOptions(); });
+        $optionsFactoryMock = $this->getMockBuilder(OptionsFactory::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['create'])
+            ->getMock();
+        $optionsFactoryMock->method('create')->willReturnCallback(function () {
+            return new PdfOptions();
+        });
         $pdfResult = new PdfResult(
             $this->mockPdfResponseFactory(),
             new PdfFactory($this->fakePdfEngine, $this->stubConfig),
@@ -74,12 +73,22 @@ class PdfResultTest extends \PHPUnit_Framework_TestCase
      */
     private function mockPdfResponseFactory()
     {
-        $pdfResponseFactory = $this->getMockBuilder(PdfResponseFactory::class)->disableOriginalConstructor()->setMethods(['create'])->getMock();
+        $pdfResponseFactory = $this->getMockBuilder(PdfResponseFactory::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['create'])
+            ->getMock();
         $pdfResponseFactory->method('create')->willReturnCallback(
-            function($data) {
+            function ($data) {
                 return new PdfResponse($data[PdfResponse::PARAM_OPTIONS]);
             }
         );
+
         return $pdfResponseFactory;
+    }
+
+    protected function setUp()
+    {
+        $this->fakePdfEngine = new FakePdfEngine();
+        $this->stubConfig = $this->getMockBuilder(ScopeConfigInterface::class)->getMockForAbstractClass();
     }
 }

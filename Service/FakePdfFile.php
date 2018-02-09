@@ -1,5 +1,7 @@
 <?php
+
 namespace Staempfli\Pdf\Service;
+
 use Staempfli\Pdf\Api\PdfFile;
 
 /**

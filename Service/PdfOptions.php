@@ -1,7 +1,8 @@
 <?php
+
 namespace Staempfli\Pdf\Service;
 
-use \ArrayObject;
+use ArrayObject;
 use Staempfli\Pdf\Api\Options;
 
 /**
@@ -462,6 +463,7 @@ final class PdfOptions extends ArrayObject implements Options
     const LOAD_ON_ERROR_ABORT = 'abort';
     const LOAD_ON_ERROR_IGNORE = 'ignore';
     const LOAD_ON_ERROR_SKIP = 'skip';
+
     /**
      * PdfOptions constructor.
      *
@@ -475,14 +477,16 @@ final class PdfOptions extends ArrayObject implements Options
      * @param int $flags
      * @param string $iteratorClass
      */
-    public function __construct($input = [], $flags = 0, $iteratorClass = \ArrayIterator::class)
-    {
+    public function __construct(
+        $input = [],
+        $flags = 0,
+        $iteratorClass = \ArrayIterator::class
+    ) {
         parent::__construct($input, $flags, $iteratorClass);
     }
 
     /**
-     * @param Options $newOptions
-     * @return PdfOptions
+     * {@inheritdoc}
      */
     public function merge(Options $newOptions)
     {
@@ -490,12 +494,15 @@ final class PdfOptions extends ArrayObject implements Options
         foreach ($newOptions as $key => $value) {
             $merged[$key] = $value;
         }
+
         return $merged;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function asArray()
     {
-        return (array) $this;
+        return (array)$this;
     }
-
 }

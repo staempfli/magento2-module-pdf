@@ -1,6 +1,7 @@
 <?php
+
 namespace Staempfli\Pdf\Service;
-use Staempfli\Pdf\Service\FakePdfFile;
+
 use Staempfli\Pdf\Api\Medium;
 use Staempfli\Pdf\Api\Options;
 use Staempfli\Pdf\Api\PdfEngine;
@@ -59,6 +60,7 @@ class FakePdfEngine implements PdfEngine
     {
         $this->globalOptions = $globalOptions;
         $this->fakePdfFile->isGenerated = true;
+
         return $this->fakePdfFile;
     }
 }

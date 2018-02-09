@@ -1,8 +1,10 @@
 <?php
+
 namespace Staempfli\Pdf\Api;
 
 /**
  * Underlying PDF engine, implemented by adapter
+ * @api
  */
 interface PdfEngine
 {

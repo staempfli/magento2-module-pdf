@@ -1,8 +1,10 @@
 <?php
+
 namespace Staempfli\Pdf\Api;
 
 /**
  * Printable table of contents
+ * @api
  */
 interface TableOfContents
 {

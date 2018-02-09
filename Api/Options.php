@@ -1,8 +1,10 @@
 <?php
+
 namespace Staempfli\Pdf\Api;
 
 /**
  * Options for PDF renderer as traversable hash map
+ * @api
  */
 interface Options extends \ArrayAccess, \Traversable
 {

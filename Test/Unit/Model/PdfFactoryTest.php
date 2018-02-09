@@ -1,4 +1,5 @@
 <?php
+
 namespace Staempfli\Pdf\Test\Unit\Model;
 
 
@@ -6,7 +7,6 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Staempfli\Pdf\Model\Config;
 use Staempfli\Pdf\Model\PdfFactory;
 use Staempfli\Pdf\Service\FakePdfEngine;
-use Staempfli\Pdf\Service\Pdf;
 use Staempfli\Pdf\Service\PdfOptions;
 
 
@@ -18,32 +18,10 @@ class PdfFactoryTest extends \PHPUnit_Framework_TestCase
     /** @var ScopeConfigInterface|\PHPUnit_Framework_MockObject_MockObject */
     private $stubConfig;
 
-    protected function setUp()
-    {
-        $this->fakePdfEngine = new FakePdfEngine();
-        $this->stubConfig = $this->getMockBuilder(ScopeConfigInterface::class)->getMockForAbstractClass();
-    }
-
-    /**
-     * @dataProvider dataScopeConfig
-     * @param array $scopeConfigValueMap
-     * @param array $expectedOptions
-     */
-    public function testOptionsFromConfig(array $scopeConfigValueMap, array $expectedOptions)
-    {
-        $this->stubConfig->method('getValue')->willReturnMap($scopeConfigValueMap);
-        $pdfFactory = new PdfFactory($this->fakePdfEngine, $this->stubConfig);
-
-        $pdfFactory->create()->file();
-
-        $this->assertEquals(
-            $expectedOptions,
-            (array) $this->fakePdfEngine->globalOptions
-        );
-    }
     public static function dataScopeConfig()
     {
         $default = ScopeConfigInterface::SCOPE_TYPE_DEFAULT;
+
         return [
             'default' => [
                 'scope_config_value_map' => [
@@ -58,8 +36,8 @@ class PdfFactoryTest extends \PHPUnit_Framework_TestCase
                 ],
                 'expected_options' => [
                     PdfOptions::KEY_GLOBAL_CLI_OPTIONS => [
-                    ]
-                ]
+                    ],
+                ],
             ],
             'all' => [
                 'scope_config_value_map' => [
@@ -82,9 +60,33 @@ class PdfFactoryTest extends \PHPUnit_Framework_TestCase
                         PdfOptions::KEY_CLI_OPTIONS_USE_XVFB_RUN => true,
                         PdfOptions::KEY_CLI_OPTIONS_XVFB_RUN_BINARY => 'xvfb-run',
                         PdfOptions::KEY_CLI_OPTIONS_XVFB_RUN_OPTIONS => '--server-args="-screen 0, 1024x768x24"',
-                    ]
-                ]
-            ]
+                    ],
+                ],
+            ],
         ];
+    }
+
+    /**
+     * @dataProvider dataScopeConfig
+     * @param array $scopeConfigValueMap
+     * @param array $expectedOptions
+     */
+    public function testOptionsFromConfig(array $scopeConfigValueMap, array $expectedOptions)
+    {
+        $this->stubConfig->method('getValue')->willReturnMap($scopeConfigValueMap);
+        $pdfFactory = new PdfFactory($this->fakePdfEngine, $this->stubConfig);
+
+        $pdfFactory->create()->file();
+
+        $this->assertEquals(
+            $expectedOptions,
+            (array)$this->fakePdfEngine->globalOptions
+        );
+    }
+
+    protected function setUp()
+    {
+        $this->fakePdfEngine = new FakePdfEngine();
+        $this->stubConfig = $this->getMockBuilder(ScopeConfigInterface::class)->getMockForAbstractClass();
     }
 }

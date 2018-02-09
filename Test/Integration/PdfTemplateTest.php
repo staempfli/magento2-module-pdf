@@ -1,13 +1,12 @@
 <?php
+
 namespace Staempfli\Pdf\Test\Integration;
 
 use Magento\Framework\View\Element\Text;
 use Magento\Framework\View\Layout;
 use Magento\TestFramework\ObjectManager;
-use Magento\Framework\View\Element\Template\Context as TemplateContext;
 use Staempfli\Pdf\Block\PdfTemplate;
 use Staempfli\Pdf\Service\FakePdfEngine;
-use Staempfli\Pdf\Service\Pdf;
 use Staempfli\Pdf\Service\PdfAppendContent;
 use Staempfli\Pdf\Service\PdfOptions;
 
@@ -17,12 +16,6 @@ class PdfTemplateTest extends \PHPUnit_Framework_TestCase
     protected $objectManager;
     /** @var Layout */
     private $layout;
-
-    protected function setUp()
-    {
-        $this->objectManager = ObjectManager::getInstance();
-        $this->layout = $this->objectManager->get(Layout::class);
-    }
 
     /**
      * @magentoAppIsolation enabled
@@ -40,5 +33,11 @@ class PdfTemplateTest extends \PHPUnit_Framework_TestCase
             [['test', new PdfOptions([])]],
             $fakePdfEngine->pages
         );
+    }
+
+    protected function setUp()
+    {
+        $this->objectManager = ObjectManager::getInstance();
+        $this->layout = $this->objectManager->get(Layout::class);
     }
 }

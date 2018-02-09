@@ -1,10 +1,10 @@
 <?php
+
 namespace Staempfli\Pdf\Model;
 
 use Magento\Framework\App\ResponseInterface;
 use Staempfli\Pdf\Api\Medium;
 use Staempfli\Pdf\Api\Options;
-use Staempfli\Pdf\Api\OptionsFactory as PdfOptionsFactory;
 use Staempfli\Pdf\Api\SourceDocument;
 
 /**
@@ -16,24 +16,33 @@ use Staempfli\Pdf\Api\SourceDocument;
  */
 final class PdfResponse implements ResponseInterface, SourceDocument
 {
+    const PARAM_OPTIONS = 'options';
 
+    /**
+     * @var string
+     */
     private $body;
-    /** @var  Options */
+
+    /**
+     * @var \Staempfli\Pdf\Api\Options
+     */
     private $pdfOptions;
 
-    const PARAM_OPTIONS = 'options';
-    public function __construct(Options $options)
-    {
+    /**
+     * @param \Staempfli\Pdf\Api\Options $options
+     */
+    public function __construct(
+        Options $options
+    ) {
         $this->pdfOptions = $options;
     }
 
     /**
-     * We don't actually send a HTTP response, the PdfResponse instance is sent to the Pdf service instead
-     *
-     * @return void
+     * {@inheritdoc}
      */
     public function sendResponse()
     {
+        /* We don't actually send a HTTP response, the PdfResponse instance is sent to the Pdf service instead */
         return;
     }
 
@@ -46,15 +55,15 @@ final class PdfResponse implements ResponseInterface, SourceDocument
     public function appendBody($value)
     {
         $this->body .= $value;
+
         return $this;
     }
 
     /**
-     * @param Medium $medium
+     * {@inheritdoc}
      */
     public function printTo(Medium $medium)
     {
         $medium->printHtml($this->body, $this->pdfOptions);
     }
-
 }

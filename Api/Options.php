@@ -1,8 +1,12 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Api;
 
 /**
  * Options for PDF renderer as traversable hash map
+ * @api
  */
 interface Options extends \ArrayAccess, \Traversable
 {

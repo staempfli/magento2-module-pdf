@@ -1,19 +1,24 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
+-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="\Staempfli\Pdf\Api\PdfEngine" type="\Staempfli\Pdf\Adapter\WkPdfEngine"/>
-    <preference for="\Staempfli\Pdf\Api\Options" type="\Staempfli\Pdf\Service\PdfOptions" />
+    <preference for="Staempfli\Pdf\Api\PdfEngine" type="Staempfli\Pdf\Adapter\WkPdfEngine" />
+    <preference for="Staempfli\Pdf\Api\Options" type="Staempfli\Pdf\Service\PdfOptions" />
     <type name="Magento\Framework\Controller\ResultFactory">
         <arguments>
             <argument name="typeMap" xsi:type="array">
                 <item name="pdf" xsi:type="array">
-                    <item name="type" xsi:type="const">\Staempfli\Pdf\Model\View\PdfResult::TYPE</item>
-                    <item name="class" xsi:type="string">\Staempfli\Pdf\Model\View\PdfResult</item>
+                    <item name="type" xsi:type="const">Staempfli\Pdf\Model\View\PdfResult::TYPE</item>
+                    <item name="class" xsi:type="string">Staempfli\Pdf\Model\View\PdfResult</item>
                 </item>
             </argument>
         </arguments>
     </type>
-    <type name="\Staempfli\Pdf\Service\PdfOptions" shared="false"/>
-    <type name="\Staempfli\Pdf\Model\PdfFactory" shared="false"/>
-    <type name="\Staempfli\Pdf\Adapter\WkPdfEngine" shared="false" />
-    <type name="\mikehaertl\wkhtmlto\Pdf" shared="false" />
+    <type name="Staempfli\Pdf\Service\PdfOptions" shared="false" />
+    <type name="Staempfli\Pdf\Model\PdfFactory" shared="false" />
+    <type name="Staempfli\Pdf\Adapter\WkPdfEngine" shared="false" />
+    <type name="mikehaertl\wkhtmlto\Pdf" shared="false" />
 </config>

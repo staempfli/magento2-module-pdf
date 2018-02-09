@@ -1,7 +1,10 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Test\Unit\Service;
 
-use Staempfli\Pdf\Service\FakePdfEngine;
+use Staempfli\Pdf\Test\Service\FakePdfEngine;
 use Staempfli\Pdf\Service\PdfCover;
 use Staempfli\Pdf\Service\PdfOptions;
 
@@ -12,11 +15,6 @@ class PdfCoverTest extends \PHPUnit_Framework_TestCase
     /** @var PdfCover */
     private $medium;
 
-    protected function setUp()
-    {
-        $this->pdfEngine = new FakePdfEngine();
-        $this->medium = new PdfCover($this->pdfEngine);
-    }
     public function testPrintHtml()
     {
         $html = '<title>COVER</title>';
@@ -28,5 +26,11 @@ class PdfCoverTest extends \PHPUnit_Framework_TestCase
         $options = new PdfOptions(['new' => 'true']);
         $this->medium->printHtml($html, $options);
         $this->assertEquals([$html, $options], $this->pdfEngine->cover);
+    }
+
+    protected function setUp()
+    {
+        $this->pdfEngine = new FakePdfEngine();
+        $this->medium = new PdfCover($this->pdfEngine);
     }
 }

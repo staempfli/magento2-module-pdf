@@ -1,8 +1,12 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Api;
 
 /**
  * A print medium. Receives HTML from SourceDocument.
+ * @api
  */
 interface Medium
 {
@@ -14,5 +18,4 @@ interface Medium
      * @return void
      */
     public function printHtml($html, Options $options);
-
 }

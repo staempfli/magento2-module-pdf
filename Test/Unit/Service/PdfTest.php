@@ -1,13 +1,16 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Test\Unit\Service;
 
 
-use Staempfli\Pdf\Service\FakePdfEngine;
-use Staempfli\Pdf\Api\PdfFile;
 use Staempfli\Pdf\Api\NullToc;
+use Staempfli\Pdf\Api\PdfFile;
+use Staempfli\Pdf\Test\Service\FakePdfEngine;
+use Staempfli\Pdf\Test\Service\FakeSourceDocument;
 use Staempfli\Pdf\Service\Pdf;
 use Staempfli\Pdf\Service\PdfOptions;
-use Staempfli\Pdf\Service\FakeSourceDocument;
 
 
 class PdfTest extends \PHPUnit_Framework_TestCase
@@ -16,12 +19,6 @@ class PdfTest extends \PHPUnit_Framework_TestCase
     private $fakePdfEngine;
     /** @var Pdf */
     private $pdf;
-
-    protected function setUp()
-    {
-        $this->fakePdfEngine = new FakePdfEngine();
-        $this->pdf = new Pdf($this->fakePdfEngine);
-    }
 
     public function testBuildEmpty()
     {
@@ -59,18 +56,30 @@ class PdfTest extends \PHPUnit_Framework_TestCase
         $this->pdf->setOptions(new PdfOptions(['first-option' => 'foo', 'second-option' => 'bar']));
         $this->pdf->addOptions(new PdfOptions(['third-option' => 'baz', 'first-option' => 'foo²']));
         $this->pdf->file();
-        $this->assertEquals(new PdfOptions(['first-option' => 'foo²', 'second-option' => 'bar', 'third-option' => 'baz']), $this->fakePdfEngine->globalOptions);
+        $this->assertEquals(new PdfOptions([
+            'first-option' => 'foo²',
+            'second-option' => 'bar',
+            'third-option' => 'baz',
+        ]), $this->fakePdfEngine->globalOptions);
     }
+
     public function testAppendContent()
     {
         $this->pdf->appendContent(new FakeSourceDocument('HTML source', new PdfOptions(['looks' => 'nice'])));
         $this->pdf->file();
         $this->assertEquals(['HTML source', new PdfOptions(['looks' => 'nice'])], $this->fakePdfEngine->pages[0]);
     }
+
     public function testSetCover()
     {
         $this->pdf->appendCover(new FakeSourceDocument('Cover HTML source', new PdfOptions(['looks' => 'great'])));
         $this->pdf->file();
         $this->assertEquals(['Cover HTML source', new PdfOptions(['looks' => 'great'])], $this->fakePdfEngine->cover);
+    }
+
+    protected function setUp()
+    {
+        $this->fakePdfEngine = new FakePdfEngine();
+        $this->pdf = new Pdf($this->fakePdfEngine);
     }
 }

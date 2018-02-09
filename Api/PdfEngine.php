@@ -1,8 +1,12 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Api;
 
 /**
  * Underlying PDF engine, implemented by adapter
+ * @api
  */
 interface PdfEngine
 {

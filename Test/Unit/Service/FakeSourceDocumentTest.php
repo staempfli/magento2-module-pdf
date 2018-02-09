@@ -1,10 +1,13 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Test\Unit\Service;
 
-use Staempfli\Pdf\Service\FakePdfEngine;
-use Staempfli\Pdf\Service\PdfOptions;
+use Staempfli\Pdf\Test\Service\FakePdfEngine;
+use Staempfli\Pdf\Test\Service\FakeSourceDocument;
 use Staempfli\Pdf\Service\PdfAppendContent;
-use Staempfli\Pdf\Service\FakeSourceDocument;
+use Staempfli\Pdf\Service\PdfOptions;
 
 class FakeSourceDocumentTest extends \PHPUnit_Framework_TestCase
 {

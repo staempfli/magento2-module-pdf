@@ -1,13 +1,12 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Service;
 
 use Staempfli\Pdf\Api\Options;
-use Staempfli\Pdf\Service\PdfAppendContent;
-use Staempfli\Pdf\Service\PdfCover;
 use Staempfli\Pdf\Api\PdfEngine;
 use Staempfli\Pdf\Api\PdfFile;
-use Staempfli\Pdf\Service\PdfOptions;
-use Staempfli\Pdf\Service\PdfTableOfContents;
 use Staempfli\Pdf\Api\SourceDocument;
 
 /**
@@ -15,13 +14,22 @@ use Staempfli\Pdf\Api\SourceDocument;
  */
 class Pdf
 {
-    /** @var PdfEngine */
+    /**
+     * @var \Staempfli\Pdf\Api\PdfEngine
+     */
     private $engine;
-    /** @var Options */
+
+    /**
+     * @var \Staempfli\Pdf\Service\PdfOptions
+     */
     private $options;
 
-    public function __construct(PdfEngine $engine)
-    {
+    /**
+     * @param \Staempfli\Pdf\Api\PdfEngine $engine
+     */
+    public function __construct(
+        PdfEngine $engine
+    ) {
         $this->engine = $engine;
         $this->options = new PdfOptions();
     }
@@ -30,20 +38,26 @@ class Pdf
      * Replace options
      *
      * @param Options $options
+     * @return $this
      */
     public function setOptions(Options $options)
     {
         $this->options = $options;
+
+        return $this;
     }
 
     /**
      * Add/override options
      *
      * @param Options $options
+     * @return $this;
      */
     public function addOptions(Options $options)
     {
         $this->options = $this->options->merge($options);
+
+        return $this;
     }
 
     /**
@@ -87,6 +101,7 @@ class Pdf
     {
         $source->printTo(new PdfCover($this->engine));
     }
+
     /**
      * @return PdfFile
      */

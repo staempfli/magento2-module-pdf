@@ -1,4 +1,7 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Model\View;
 
 use Magento\Backend\Model\View\Result\Page;
@@ -13,6 +16,10 @@ use Magento\Framework\App\ResponseInterface;
  */
 class PageResultWithoutHttp extends Page
 {
+    /**
+     * @param \Magento\Framework\App\ResponseInterface $response
+     * @return $this
+     */
     public function renderNonHttpResult(ResponseInterface $response)
     {
         \Magento\Framework\Profiler::start('LAYOUT');
@@ -23,10 +30,12 @@ class PageResultWithoutHttp extends Page
         $this->eventManager->dispatch('layout_render_before');
         \Magento\Framework\Profiler::stop('layout_render');
         \Magento\Framework\Profiler::stop('LAYOUT');
+
         return $this;
     }
 
     /**
+     * {@inheritdoc}
      * @todo replace $this->pageConfigRenderer with specialized renderer to replace http:// URLs with file:// URLs
      * @todo for optimized rendering of local resources
      * @todo (similar to \Magento\Developer\Model\View\Page\Config\ClientSideLessCompilation\Renderer)
@@ -35,5 +44,4 @@ class PageResultWithoutHttp extends Page
     {
         parent::initPageConfigReader();
     }
-
 }

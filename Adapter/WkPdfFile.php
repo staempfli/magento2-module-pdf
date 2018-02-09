@@ -1,4 +1,7 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Adapter;
 
 use mikehaertl\wkhtmlto\Pdf;
@@ -9,14 +12,23 @@ use Staempfli\Pdf\Api\PdfFile;
  */
 final class WkPdfFile implements PdfFile
 {
-    /** @var Pdf */
+    /**
+     * @var \mikehaertl\wkhtmlto\Pdf
+     */
     private $wkPdf;
 
-    public function __construct(Pdf $wkPdf)
-    {
+    /**
+     * @param \mikehaertl\wkhtmlto\Pdf $wkPdf
+     */
+    public function __construct(
+        Pdf $wkPdf
+    ) {
         $this->wkPdf = $wkPdf;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function saveAs($path)
     {
         if (false === $this->wkPdf->saveAs($path)) {
@@ -24,6 +36,9 @@ final class WkPdfFile implements PdfFile
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function send()
     {
         if (false === $this->wkPdf->send()) {
@@ -31,13 +46,16 @@ final class WkPdfFile implements PdfFile
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function toString()
     {
         $result = $this->wkPdf->toString();
         if ($result === false) {
             throw new WkPdfException($this->wkPdf->getError());
         }
+
         return $result;
     }
-
 }

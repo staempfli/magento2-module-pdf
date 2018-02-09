@@ -1,12 +1,18 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Model;
 
+/**
+ * Class Cache
+ */
 class Cache
 {
     const CACHE_TAG = 'STAEMPFLI_PDF';
 
     /**
-     * @param $cacheKey
+     * @param string $cacheKey
      * @SuppressWarnings(PHPMD.UnusedFormalParameter) // https://phpmd.org/rules/index.html
      */
     public function save($cacheKey)
@@ -15,7 +21,7 @@ class Cache
     }
 
     /**
-     * @param $cacheKey
+     * @param string $cacheKey
      * @SuppressWarnings(PHPMD.UnusedFormalParameter) // https://phpmd.org/rules/index.html
      */
     public function load($cacheKey)

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Block;
 
 use Magento\Framework\View\Element\Template;
@@ -22,17 +25,33 @@ use Staempfli\Pdf\Api\SourceDocument;
  */
 class PdfTemplate extends Template implements SourceDocument
 {
+    /**
+     * @var string
+     */
     protected $_template = 'Magento_Theme::html/container.phtml';
 
-    /** @var Options */
+    /**
+     * @var \Staempfli\Pdf\Api\Options
+     */
     protected $pdfOptions;
 
-    public function __construct(Template\Context $context, PdfOptionsFactory $optionsFactory, array $data = [])
-    {
+    /**
+     * @param \Magento\Framework\View\Element\Template\Context $context
+     * @param \Staempfli\Pdf\Api\OptionsFactory $optionsFactory
+     * @param array $data
+     */
+    public function __construct(
+        Template\Context $context,
+        PdfOptionsFactory $optionsFactory,
+        array $data = []
+    ) {
         $this->pdfOptions = $optionsFactory->create();
         parent::__construct($context, $data);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function printTo(Medium $medium)
     {
         $medium->printHtml($this->toHtml(), $this->pdfOptions);

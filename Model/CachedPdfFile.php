@@ -1,15 +1,19 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Model;
 
 use Staempfli\Pdf\Api\PdfFile;
 
 /**
- * Interface for PDF files loaded from file cache
+ * Class for PDF files loaded from file cache
  */
 class CachedPdfFile implements PdfFile
 {
     /**
      * CachedPdfFile constructor.
+     *
      * @param $pathToCachedFile
      * @SuppressWarnings(PHPMD.UnusedFormalParameter) // https://phpmd.org/rules/index.html
      */
@@ -18,7 +22,7 @@ class CachedPdfFile implements PdfFile
     }
 
     /**
-     * @param string $path
+     * {@inheritdoc}
      * @SuppressWarnings(PHPMD.UnusedFormalParameter) // https://phpmd.org/rules/index.html
      */
     public function saveAs($path)
@@ -26,11 +30,17 @@ class CachedPdfFile implements PdfFile
         // TODO: Implement saveAs() method.
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function send()
     {
         // TODO: Implement send() method.
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function toString()
     {
         // TODO: Implement toString() method.

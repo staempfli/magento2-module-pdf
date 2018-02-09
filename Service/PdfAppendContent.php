@@ -1,6 +1,8 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Service;
-
 
 use Staempfli\Pdf\Api\Medium;
 use Staempfli\Pdf\Api\Options;
@@ -12,15 +14,22 @@ use Staempfli\Pdf\Api\PdfEngine;
 final class PdfAppendContent implements Medium
 {
     /**
-     * @var PdfEngine
+     * @var \Staempfli\Pdf\Api\PdfEngine
      */
     private $pdfEngine;
 
-    public function __construct(PdfEngine $pdfEngine)
-    {
+    /**
+     * @param \Staempfli\Pdf\Api\PdfEngine $pdfEngine
+     */
+    public function __construct(
+        PdfEngine $pdfEngine
+    ) {
         $this->pdfEngine = $pdfEngine;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function printHtml($html, Options $options)
     {
         $this->pdfEngine->addPage($html, $options);

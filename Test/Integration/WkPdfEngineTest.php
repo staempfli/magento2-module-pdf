@@ -1,11 +1,15 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Test\Integration;
+
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\TestFramework\ObjectManager;
 use Staempfli\Pdf\Adapter\WkPdfException;
 use Staempfli\Pdf\Model\Config;
 use Staempfli\Pdf\Model\PdfFactory;
-use Staempfli\Pdf\Service\FakeSourceDocument;
+use Staempfli\Pdf\Test\Service\FakeSourceDocument;
 use Staempfli\Pdf\Service\PdfOptions;
 
 class WkPdfEngineTest extends \PHPUnit_Framework_TestCase
@@ -15,23 +19,6 @@ class WkPdfEngineTest extends \PHPUnit_Framework_TestCase
     /** @var PdfFactory */
     private $pdfFactory;
 
-    protected function setUp()
-    {
-        parent::setUp();
-        $this->objectManager = ObjectManager::getInstance();
-        $this->pdfFactory = $this->objectManager->create(PdfFactory::class);
-
-        $wkhtmltopdfBinary = $this->getWkhtmltopdfBinary();
-        if (! $this->isExecutable($wkhtmltopdfBinary)) {
-            $this->markTestSkipped(
-                sprintf(
-                    'wkhtmltopdf binary not found at %s. If it is installed in a different location, '.
-                    'please adjust the configuration.',
-                    $wkhtmltopdfBinary
-                )
-            );
-        }
-    }
     public function testGeneratePdf()
     {
         $pdf = $this->pdfFactory->create();
@@ -45,6 +32,23 @@ class WkPdfEngineTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(WkPdfException::class);
         $this->createInvalidPdf()->file()->toString();
+    }
+
+    /**
+     * @return \Staempfli\Pdf\Service\Pdf
+     */
+    private function createInvalidPdf()
+    {
+        $pdf = $this->pdfFactory->create();
+        $pdf->setOptions(
+            new PdfOptions(
+                [
+                    'gibberish' => 'pffflllltt',
+                ]
+            )
+        );
+
+        return $pdf;
     }
 
     public function testExceptionOnSend()
@@ -82,7 +86,7 @@ class WkPdfEngineTest extends \PHPUnit_Framework_TestCase
                 PdfOptions::KEY_PAGE_HEADER_TEXT_RIGHT => 'Page [page]',
                 PdfOptions::KEY_GLOBAL_IGNORE_WARNINGS => true,
                 PdfOptions::KEY_PAGE_FOOTER_TEXT_LEFT => 'Hello, I am a footer.',
-                PdfOptions::KEY_PAGE_FOOTER_TEXT_RIGHT => 'I am text based.'
+                PdfOptions::KEY_PAGE_FOOTER_TEXT_RIGHT => 'I am text based.',
             ]
         ));
         $pdf->appendCover(new FakeSourceDocument('<body>BIG COVER</body>', new PdfOptions([])));
@@ -99,18 +103,26 @@ HTML;
         $pdf->appendContent(new FakeSourceDocument($contentHtml, new PdfOptions([])));
         $pdf->file()->saveAs('tmp/staempflitest.pdf');
         $this->assertNotEmpty(\realpath('tmp/staempflitest.pdf'), 'File tmp/staempflitest.pdf should be saved');
-        $this->assertGreaterThan(10000, \filesize(\realpath('tmp/staempflitest.pdf')), 'File tmp/staempflitest.pdf should be > 10 KB');
+        $this->assertGreaterThan(10000, \filesize(\realpath('tmp/staempflitest.pdf')),
+            'File tmp/staempflitest.pdf should be > 10 KB');
     }
 
-    /**
-     * @param $command
-     * @return bool
-     * @SuppressWarnings(PHPMD.UnusedLocalVariable) // https://phpmd.org/rules/index.html
-     */
-    private function isExecutable($command)
+    protected function setUp()
     {
-        exec($command . ' 1> /dev/null 2> /dev/null', $output, $return);
-        return $return <= 1;
+        parent::setUp();
+        $this->objectManager = ObjectManager::getInstance();
+        $this->pdfFactory = $this->objectManager->create(PdfFactory::class);
+
+        $wkhtmltopdfBinary = $this->getWkhtmltopdfBinary();
+        if (!$this->isExecutable($wkhtmltopdfBinary)) {
+            $this->markTestSkipped(
+                sprintf(
+                    'wkhtmltopdf binary not found at %s. If it is installed in a different location, ' .
+                    'please adjust the configuration.',
+                    $wkhtmltopdfBinary
+                )
+            );
+        }
     }
 
     /**
@@ -124,22 +136,19 @@ HTML;
         if (empty($wkhtmltopdfBinary)) {
             return 'wkhtmltopdf';
         }
+
         return $wkhtmltopdfBinary;
     }
 
     /**
-     * @return \Staempfli\Pdf\Service\Pdf
+     * @param $command
+     * @return bool
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable) // https://phpmd.org/rules/index.html
      */
-    private function createInvalidPdf()
+    private function isExecutable($command)
     {
-        $pdf = $this->pdfFactory->create();
-        $pdf->setOptions(
-            new PdfOptions(
-                [
-                    'gibberish' => 'pffflllltt',
-                ]
-            )
-        );
-        return $pdf;
+        exec($command . ' 1> /dev/null 2> /dev/null', $output, $return);
+
+        return $return <= 1;
     }
 }

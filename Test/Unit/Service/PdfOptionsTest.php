@@ -1,10 +1,28 @@
 <?php
+/**
+ * Copyright © 2018 Stämpfli AG, All rights reserved.
+ */
 namespace Staempfli\Pdf\Test\Unit\Service;
 
 use Staempfli\Pdf\Service\PdfOptions;
 
 class PdfOptionsTest extends \PHPUnit_Framework_TestCase
 {
+    public static function dataMerge()
+    {
+        return [
+            [
+                'original' => ['some-key' => 'some-default-value', 'other-key' => 'other-default-value'],
+                'to_merge' => ['some-key' => 'overridden-value', 'new-key' => 'new-value'],
+                'expected' => [
+                    'some-key' => 'overridden-value',
+                    'other-key' => 'other-default-value',
+                    'new-key' => 'new-value',
+                ],
+            ],
+        ];
+    }
+
     public function testToArray()
     {
         $array = [
@@ -14,6 +32,7 @@ class PdfOptionsTest extends \PHPUnit_Framework_TestCase
         $options = new PdfOptions($array);
         $this->assertEquals($array, $options->asArray());
     }
+
     /**
      * @dataProvider dataMerge
      * @param $originalValues
@@ -33,15 +52,5 @@ class PdfOptionsTest extends \PHPUnit_Framework_TestCase
             \iterator_to_array($options),
             'original options should be unchanged'
         );
-    }
-    public static function dataMerge()
-    {
-        return [
-            [
-                'original' => ['some-key' => 'some-default-value', 'other-key' => 'other-default-value'],
-                'to_merge' => ['some-key' => 'overridden-value', 'new-key' => 'new-value'],
-                'expected' => ['some-key' => 'overridden-value', 'other-key' => 'other-default-value', 'new-key' => 'new-value'],
-            ],
-        ];
     }
 }

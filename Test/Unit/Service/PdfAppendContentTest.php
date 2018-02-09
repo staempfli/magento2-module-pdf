@@ -4,7 +4,7 @@
  */
 namespace Staempfli\Pdf\Test\Unit\Service;
 
-use StaempfliPdf\Test\Service\FakePdfEngine;
+use Staempfli\Pdf\Test\Service\FakePdfEngine;
 use Staempfli\Pdf\Service\PdfAppendContent;
 use Staempfli\Pdf\Service\PdfOptions;
 

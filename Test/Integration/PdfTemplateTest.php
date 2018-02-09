@@ -8,7 +8,7 @@ use Magento\Framework\View\Element\Text;
 use Magento\Framework\View\Layout;
 use Magento\TestFramework\ObjectManager;
 use Staempfli\Pdf\Block\PdfTemplate;
-use StaempfliPdf\Test\Service\FakePdfEngine;
+use Staempfli\Pdf\Test\Service\FakePdfEngine;
 use Staempfli\Pdf\Service\PdfAppendContent;
 use Staempfli\Pdf\Service\PdfOptions;
 

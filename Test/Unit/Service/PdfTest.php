@@ -7,7 +7,7 @@ namespace Staempfli\Pdf\Test\Unit\Service;
 
 use Staempfli\Pdf\Api\NullToc;
 use Staempfli\Pdf\Api\PdfFile;
-use StaempfliPdf\Test\Service\FakePdfEngine;
+use Staempfli\Pdf\Test\Service\FakePdfEngine;
 use Staempfli\Pdf\Test\Service\FakeSourceDocument;
 use Staempfli\Pdf\Service\Pdf;
 use Staempfli\Pdf\Service\PdfOptions;

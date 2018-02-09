@@ -8,7 +8,7 @@ namespace Staempfli\Pdf\Test\Unit\Model;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Staempfli\Pdf\Model\Config;
 use Staempfli\Pdf\Model\PdfFactory;
-use StaempfliPdf\Test\Service\FakePdfEngine;
+use Staempfli\Pdf\Test\Service\FakePdfEngine;
 use Staempfli\Pdf\Service\PdfOptions;
 
 

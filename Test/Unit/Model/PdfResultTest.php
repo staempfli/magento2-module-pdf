@@ -12,7 +12,7 @@ use Staempfli\Pdf\Model\PdfResponse;
 use Staempfli\Pdf\Model\PdfResponseFactory;
 use Staempfli\Pdf\Model\View\PageResultWithoutHttp;
 use Staempfli\Pdf\Model\View\PdfResult;
-use StaempfliPdf\Test\Service\FakePdfEngine;
+use Staempfli\Pdf\Test\Service\FakePdfEngine;
 use Staempfli\Pdf\Service\PdfOptions;
 
 

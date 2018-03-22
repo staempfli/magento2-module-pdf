@@ -2,8 +2,7 @@
 namespace Staempfli\Pdf\Model\View;
 
 use Magento\Framework;
-use Magento\Framework\App\ResponseInterface;
-use Magento\Framework\View\Result\Page as PageResult;
+use Magento\Framework\App\Response\HttpInterface as HttpResponseInterface;
 use Staempfli\Pdf\Api\Options;
 use Staempfli\Pdf\Api\OptionsFactory;
 use Staempfli\Pdf\Model\PdfFactory;
@@ -67,10 +66,10 @@ class PdfResult extends Framework\Controller\AbstractResult
     /**
      * Renders directly to HTTP response
      *
-     * @param Framework\App\Response\Http|ResponseInterface $response
+     * @param HttpResponseInterface $response
      * @return $this
      */
-    protected function render(ResponseInterface $response)
+    protected function render(HttpResponseInterface $response)
     {
         $this->preparePdfResponse($response, $this->renderPdf());
 

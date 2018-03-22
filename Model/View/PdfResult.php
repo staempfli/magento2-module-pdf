@@ -3,6 +3,7 @@ namespace Staempfli\Pdf\Model\View;
 
 use Magento\Framework;
 use Magento\Framework\App\Response\HttpInterface as HttpResponseInterface;
+use Magento\Framework\App\ResponseInterface;
 use Staempfli\Pdf\Api\Options;
 use Staempfli\Pdf\Api\OptionsFactory;
 use Staempfli\Pdf\Model\PdfFactory;

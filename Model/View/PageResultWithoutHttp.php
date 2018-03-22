@@ -2,7 +2,7 @@
 namespace Staempfli\Pdf\Model\View;
 
 use Magento\Backend\Model\View\Result\Page;
-use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\App\Response\HttpInterface as HttpResponseInterface;
 
 /**
  * This exposes the render() method of the original Page result object to allow calling it without using
@@ -13,7 +13,7 @@ use Magento\Framework\App\ResponseInterface;
  */
 class PageResultWithoutHttp extends Page
 {
-    public function renderNonHttpResult(ResponseInterface $response)
+    public function renderNonHttpResult(HttpResponseInterface $response)
     {
         \Magento\Framework\Profiler::start('LAYOUT');
         \Magento\Framework\Profiler::start('layout_render');
